@@ -1,37 +1,37 @@
 const projects = [
   {
     title: 'Online Food Ordering System',
-    type: 'Featured Web App',
+    type: 'Featured · Web App',
     year: '2025',
     description:
-      'Designed an intuitive food ordering system with a clear product flow and fast ordering experience.',
+      'Designed an intuitive Food Ordering System, emphasizing clarity and user efficiency.',
     tags: ['WordPress', 'Elementor', 'Hostinger', 'WooCommerce'],
     link: 'https://lokalexpressgrill.com/',
   },
   {
     title: 'Farming Website',
-    type: 'Business Website',
+    type: 'Business',
     year: '2026',
     description:
-      'Developed a modern farming website for product sales with a simple, responsive customer journey.',
+      'Developed a modern Farming Website that sells a variety of farming products with a focus on usability and seamless navigation for end users.',
     tags: ['WordPress', 'Elementor', 'WooCommerce'],
     link: 'https://mollahauto.com/',
   },
   {
-    title: 'POS System to Manage Sales',
-    type: 'POS Dashboard',
+    title: 'Developed a POS System to Manage Sales',
+    type: 'POS',
     year: '2025',
     description:
-      'Created a responsive POS dashboard that helps manage sales smoothly across devices and screen sizes.',
+      'Created a responsive dashboard layout that manages sales smoothly across devices and screen sizes.',
     tags: ['PHP', 'Bootstrap', 'Laravel', 'API', 'SQL'],
     link: 'https://pos.mollahauto.com/',
   },
   {
     title: 'Business Website',
-    type: 'Client Website',
+    type: 'Web App · Dashboard',
     year: '2025',
     description:
-      'Improved the website experience with cleaner workflows, optimized interface sections, and a focused business presentation.',
+      'Improved user experience through strategic workflow streamlining and comprehensive interface component optimization.',
     tags: ['WordPress', 'Elementor', 'Hostinger'],
     link: 'https://medullaocean.com/',
   },

@@ -886,10 +886,33 @@ h4 {
   top: 12px;
 }
 
-.testimonial-quote {
-  margin: 34px 0 24px;
+.testimonial-stars {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-left: 46px;
   position: relative;
   z-index: 1;
+}
+
+.testimonial-quote {
+  margin: 22px 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-author {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.testimonial-avatar {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  flex: 0 0 auto;
 }
 
 .testimonial-meta {
