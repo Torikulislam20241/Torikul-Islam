@@ -57,11 +57,11 @@ const projects = [
 
 export default function Work() {
   return (
-    <section className="page-section work-section" aria-label="Projects">
+    <section className="page-section work-section" id="work" aria-label="Projects">
       <div className="container">
         <div className="page-heading reveal visible">
-          <span>Selected Work</span>
-          <h1>Projects built for real businesses and communities.</h1>
+          <span>Recent Work</span>
+          <h1>Featured Projects</h1>
           <p>
             A focused collection of websites, e-commerce stores, dashboards, and
             client builds with live project links.
@@ -98,7 +98,7 @@ export default function Work() {
                 >
                   Live Project
                 </a>
-                <a href="/contact" aria-label={`Contact Torikul about ${project.title}`}>
+                <a href="#contact" aria-label={`Contact Torikul about ${project.title}`}>
                   Start Similar Project
                 </a>
               </div>

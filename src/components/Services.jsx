@@ -63,11 +63,11 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="page-section services-section" aria-label="Services">
+    <section className="page-section services-section" id="services" aria-label="Services">
       <div className="container">
         <div className="page-heading reveal visible">
           <span>What I Do</span>
-          <h1>Services for websites, stores, and web applications.</h1>
+          <h1>Services I Offer</h1>
           <p>
             From idea to deployment, I provide focused development services for
             businesses that need clean execution.
@@ -96,7 +96,7 @@ export default function Services() {
         </div>
 
         <div className="page-cta reveal">
-          <a className="btn-primary" href="/contact">
+          <a className="btn-primary" href="#contact">
             Discuss Your Project
           </a>
         </div>

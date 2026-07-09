@@ -25,11 +25,11 @@ export default function Skills() {
   let delayIndex = 0
 
   return (
-    <section className="page-section skills-section" aria-label="Technical Skills">
+    <section className="page-section skills-section" id="skills" aria-label="Technical Skills">
       <div className="container">
         <div className="page-heading reveal visible">
           <span>My Expertise</span>
-          <h1>Skills and technologies I use to ship reliable websites.</h1>
+          <h1>Skills & Technologies</h1>
           <p>
             A practical stack for client websites, online stores, full-stack apps,
             tracking, deployment, and performance improvements.

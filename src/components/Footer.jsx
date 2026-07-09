@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-inner">
-        <p>© 2026 Torikul Islam. All rights reserved.</p>
+        <p>&copy; 2026 Torikul Islam. All rights reserved.</p>
 
         <div className="footer-socials" aria-label="Footer social links">
           {socialLinks.map((link) => (

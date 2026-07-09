@@ -19,7 +19,7 @@
   --color-error: #ef4444;
   --font-heading: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
-  --nav-height: 76px;
+  --nav-height: 80px;
 }
 
 html {
@@ -104,20 +104,16 @@ h3 {
 
 .container {
   margin: 0 auto;
-  max-width: 1160px;
+  max-width: 1220px;
   padding: 0 24px;
   width: 100%;
 }
 
-.page-shell {
-  min-height: calc(100vh - 96px);
-}
-
 .page-section {
-  min-height: calc(100vh - 96px);
   overflow: hidden;
-  padding: 150px 0 96px;
+  padding: 124px 0;
   position: relative;
+  scroll-margin-top: var(--nav-height);
 }
 
 .page-heading {
@@ -282,6 +278,9 @@ h3 {
 }
 
 .navbar {
+  backdrop-filter: blur(16px);
+  background: rgba(7, 9, 12, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   left: 0;
   position: fixed;
   right: 0;
@@ -295,7 +294,7 @@ h3 {
 
 .navbar-scrolled {
   backdrop-filter: blur(16px);
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(7, 9, 12, 0.96);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -308,23 +307,22 @@ h3 {
 }
 
 .navbar-brand {
-  color: #ffffff;
+  color: var(--color-primary);
   display: inline-flex;
   font-family: var(--font-heading);
-  font-size: 1.12rem;
+  font-size: clamp(1.55rem, 2.1vw, 1.9rem);
   font-weight: 700;
-  gap: 6px;
   min-width: max-content;
 }
 
-.navbar-brand span:last-child {
+.navbar-brand span {
   color: var(--color-primary);
 }
 
 .nav-links {
   align-items: center;
   display: flex;
-  gap: 6px;
+  gap: 22px;
   justify-content: center;
 }
 
@@ -332,9 +330,9 @@ h3 {
 .mobile-menu-links a {
   border-radius: 999px;
   color: var(--color-text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  padding: 9px 13px;
+  padding: 8px 0;
   transition:
     background-color 160ms ease,
     color 160ms ease;
@@ -344,18 +342,29 @@ h3 {
 .nav-links a.active,
 .mobile-menu-links a:hover,
 .mobile-menu-links a.active {
-  background: rgba(1, 211, 232, 0.1);
   color: var(--color-primary);
 }
 
 .nav-cta {
-  border: 1px solid rgba(1, 211, 232, 0.5);
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: 999px;
-  color: var(--color-primary);
+  color: #001014;
   font-size: 0.88rem;
   font-weight: 800;
   min-width: max-content;
-  padding: 9px 16px;
+  padding: 10px 18px;
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.nav-cta:hover,
+.nav-cta:focus-visible {
+  background: var(--color-primary-hover);
+  box-shadow: 0 0 30px rgba(1, 211, 232, 0.25);
+  transform: translateY(-2px);
 }
 
 .menu-toggle {
@@ -445,8 +454,9 @@ h3 {
   display: flex;
   min-height: 100vh;
   overflow: hidden;
-  padding: 132px 0 96px;
+  padding: 142px 0 96px;
   position: relative;
+  scroll-margin-top: var(--nav-height);
 }
 
 .hero-background {
@@ -515,6 +525,14 @@ h3 {
   font-size: clamp(3rem, 9vw, 6.75rem);
   line-height: 0.95;
   margin-bottom: 26px;
+}
+
+.hero-kicker {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  margin-bottom: 16px;
 }
 
 .hero-content h1 span {
@@ -1086,6 +1104,10 @@ h3 {
 }
 
 @media (max-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+
   .page-heading {
     margin-bottom: 42px;
   }
@@ -1105,10 +1127,43 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .hero-content {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.15rem, 9vw, 2.45rem);
+    line-height: 1.04;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 310px;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    max-width: 300px;
+  }
+
+  .hero-badge {
+    font-size: 0.82rem;
+    max-width: 100%;
+  }
+
   .hero-actions,
   .about-actions {
     align-items: stretch;
     flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .hero-highlight-grid {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px;
   }
 
   .hero-actions .btn-primary,

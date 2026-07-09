@@ -71,7 +71,7 @@ export default function Contact() {
   }
 
   return (
-    <section className="page-section contact-section" aria-label="Contact">
+    <section className="page-section contact-section" id="contact" aria-label="Contact">
       <div className="container">
         <div className="page-heading reveal visible">
           <span>Get In Touch</span>

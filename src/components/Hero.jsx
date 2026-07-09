@@ -1,14 +1,14 @@
 const highlights = [
-  { title: 'WordPress', detail: 'Custom themes' },
-  { title: 'Shopify', detail: 'Stores that sell' },
-  { title: 'MERN Stack', detail: 'Full-stack apps' },
+  { title: 'Frontend', detail: 'React & Vite' },
+  { title: 'Shopify', detail: 'Store builds' },
+  { title: 'Full Stack', detail: 'MERN apps' },
 ]
 
 const stats = ['50+ Projects Delivered', '3+ Years Experience', '15+ Happy Clients']
 
 export default function Hero() {
   return (
-    <section className="hero-section home-page" aria-label="Home">
+    <section className="hero-section home-page" id="hero" aria-label="Home">
       <div className="hero-background" aria-hidden="true">
         <span className="hero-orb hero-orb-one" />
         <span className="hero-orb hero-orb-two" />
@@ -22,7 +22,7 @@ export default function Hero() {
           </div>
 
           <h1>
-            Hi, I'm <span>Torikul</span>
+            <span>Torikul</span>
             <br />
             I Build Digital Experiences
           </h1>
@@ -33,17 +33,17 @@ export default function Hero() {
           </p>
 
           <div className="hero-actions">
-            <a className="btn-primary" href="/projects">
+            <a className="btn-primary" href="#work">
               View My Work
             </a>
-            <a className="btn-outline" href="/contact">
+            <a className="btn-outline" href="#contact">
               Get In Touch
             </a>
           </div>
 
           <div className="hero-highlight-grid" aria-label="Core services">
             {highlights.map((item) => (
-              <a className="hero-highlight-card glass-card" href="/skills" key={item.title}>
+              <a className="hero-highlight-card glass-card" href="#skills" key={item.title}>
                 <strong>{item.title}</strong>
                 <span>{item.detail}</span>
               </a>

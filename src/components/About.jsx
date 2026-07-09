@@ -6,7 +6,7 @@ const infoCards = [
 
 export default function About() {
   return (
-    <section className="page-section about-section" aria-label="About Torikul Islam">
+    <section className="page-section about-section" id="about" aria-label="About Torikul Islam">
       <div className="container">
         <div className="page-heading reveal visible">
           <span>About Me</span>
@@ -42,10 +42,10 @@ export default function About() {
             </div>
 
             <div className="about-actions">
-              <a className="btn-primary" href="/contact">
+              <a className="btn-primary" href="#contact">
                 Hire Me
               </a>
-              <a className="btn-outline" href="/projects">
+              <a className="btn-outline" href="#work">
                 See Projects
               </a>
             </div>

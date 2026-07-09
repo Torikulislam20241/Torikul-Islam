@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/skills', label: 'Skills' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/services', label: 'Services' },
-  { href: '/testimonials', label: 'Testimonials' },
-  { href: '/contact', label: 'Contact' },
+  { href: '#hero', label: 'Home', id: 'hero' },
+  { href: '#about', label: 'About', id: 'about' },
+  { href: '#work', label: 'Projects', id: 'work' },
+  { href: '#contact', label: 'Contact', id: 'contact' },
 ]
 
-export default function Navbar({ currentPath }) {
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('hero')
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24)
@@ -28,17 +26,34 @@ export default function Navbar({ currentPath }) {
   }, [menuOpen])
 
   useEffect(() => {
-    setMenuOpen(false)
-  }, [currentPath])
+    const sections = navLinks
+      .map((link) => document.getElementById(link.id))
+      .filter(Boolean)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+
+        if (visible[0]) {
+          setActiveSection(visible[0].target.id)
+        }
+      },
+      { rootMargin: '-35% 0px -55% 0px', threshold: [0.1, 0.25, 0.5] },
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
 
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="container navbar-inner">
-        <a className="navbar-brand" href="/" onClick={closeMenu}>
-          <span>Torikul</span>
-          <span>Islam</span>
+        <a className="navbar-brand" href="#hero" onClick={closeMenu}>
+          Torikul<span>.</span>
         </a>
 
         <nav className="nav-links" aria-label="Primary navigation">
@@ -46,14 +61,14 @@ export default function Navbar({ currentPath }) {
             <a
               key={link.href}
               href={link.href}
-              className={currentPath === link.href ? 'active' : ''}
+              className={activeSection === link.id ? 'active' : ''}
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <a className="nav-cta" href="/contact">
+        <a className="nav-cta" href="#contact">
           Hire Me
         </a>
 
@@ -76,7 +91,7 @@ export default function Navbar({ currentPath }) {
             <a
               key={link.href}
               href={link.href}
-              className={currentPath === link.href ? 'active' : ''}
+              className={activeSection === link.id ? 'active' : ''}
               onClick={closeMenu}
             >
               {link.label}
