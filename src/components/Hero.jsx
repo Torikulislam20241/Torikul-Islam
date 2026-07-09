@@ -1,79 +1,52 @@
+const stats = ['3+ Years Experience', '50+ Projects Delivered', '15+ Happy Clients']
+const techPills = ['WordPress', 'Shopify', 'MERN Stack']
+
 export default function Hero() {
   return (
-    <section id="home" aria-label="Hero">
-      <div className="hero-grid-bg" aria-hidden="true" />
-      <div className="hero-glow"  aria-hidden="true" />
-      <div className="hero-glow2" aria-hidden="true" />
+    <section id="hero" className="hero-section" aria-label="Hero">
+      <div className="hero-background" aria-hidden="true">
+        <span className="hero-orb hero-orb-one" />
+        <span className="hero-orb hero-orb-two" />
+        <span className="hero-orb hero-orb-three" />
+      </div>
 
-      <div className="container">
-        <div className="row align-items-center g-5">
-
-          {/* ── Left: Content ── */}
-          <div className="col-lg-6">
-            <div className="hero-content">
-              <div className="hero-badge" role="status">
-                <span className="hero-badge-dot" aria-hidden="true" />
-                Available for new projects
-              </div>
-
-              <h1 className="hero-title">
-                Building<br />
-                <em>Digital</em><br />
-                <span className="line2">Experiences</span>
-              </h1>
-
-              <p className="hero-sub">
-                Full stack developer crafting high-performance websites and digital
-                products that earn trust from the first click.
-              </p>
-
-              <div className="hero-btns">
-                <a href="#contact" className="btn-primary">
-                  Start a Project
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-                <a href="#work" className="btn-secondary">View My Work</a>
-              </div>
-
-              <div className="hero-stats" aria-label="Key stats">
-                <div className="stat-item">
-                  <div className="stat-num">50<span>+</span></div>
-                  <div className="stat-label">Projects Shipped</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-num">3<span>+</span></div>
-                  <div className="stat-label">Years Experience</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-num">98<span>%</span></div>
-                  <div className="stat-label">Client Satisfaction</div>
-                </div>
-              </div>
+      <div className="container hero-container">
+        <div className="hero-content reveal visible">
+          <div className="hero-badge">👋 Available for freelance work</div>
+          <h1>Tariqul Islam</h1>
+          <div className="hero-subtitle">
+            <h2>Full-Stack Developer</h2>
+            <div className="hero-tech-pills" aria-label="Core technologies">
+              {techPills.map((pill) => (
+                <span key={pill}>{pill}</span>
+              ))}
             </div>
           </div>
+          <p>
+            I build fast, scalable, and production-ready web solutions that drive real
+            business results.
+          </p>
 
-          {/* ── Right: Visual ── */}
-          <div className="col-lg-6">
-            <div className="hero-visual">
-              <div className="hero-img-wrapper">
-                <img
-                  src="/Picture.png"
-                  alt="Torikul Islam Naeem — Full Stack Developer"
-                />
-                <div className="hero-img-card" aria-hidden="true">
-                  <div className="hero-img-card-label">Latest Stack</div>
-                  <div className="hero-img-card-value">Next.js + Tailwind</div>
-                </div>
-                <div className="hero-img-card2" aria-hidden="true">💻</div>
-              </div>
-            </div>
+          <div className="hero-actions">
+            <a className="btn-primary" href="#work">
+              View My Work
+            </a>
+            <a className="btn-outline" href="#contact">
+              Hire Me
+            </a>
           </div>
 
+          <div className="hero-stats" aria-label="Experience stats">
+            {stats.map((stat) => (
+              <span key={stat}>{stat}</span>
+            ))}
+          </div>
         </div>
       </div>
+
+      <a className="scroll-indicator" href="#about" aria-label="Scroll to about section">
+        ↓
+      </a>
     </section>
   )
 }

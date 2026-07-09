@@ -1,67 +1,49 @@
 import { useEffect } from 'react'
-import { HelmetProvider, Helmet } from 'react-helmet-async'
-import Cursor from './components/Cursor'
-import ScrollProgress from './components/ScrollProgress'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import About from './components/About'
-import Services from './components/Services'
-import Work from './components/Work'
-import Testimonials from './components/Testimonials'
-import Skills from './components/Skills'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import Cursor from './components/Cursor.jsx'
+import ScrollProgress from './components/ScrollProgress.jsx'
+import Navbar from './components/Navbar.jsx'
+import Hero from './components/Hero.jsx'
+import About from './components/About.jsx'
+import Skills from './components/Skills.jsx'
+import Work from './components/Work.jsx'
+import Services from './components/Services.jsx'
+import Testimonials from './components/Testimonials.jsx'
+import Contact from './components/Contact.jsx'
+import Footer from './components/Footer.jsx'
 
-function App() {
+export default function App() {
   useEffect(() => {
-    const reveals = document.querySelectorAll('.reveal')
+    const revealItems = document.querySelectorAll('.reveal')
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, i) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), i * 80)
+            entry.target.classList.add('visible')
             observer.unobserve(entry.target)
           }
         })
       },
-      { threshold: 0.1 }
+      { rootMargin: '0px 0px -80px 0px', threshold: 0.12 },
     )
-    reveals.forEach((el) => observer.observe(el))
+
+    revealItems.forEach((item) => observer.observe(item))
+
     return () => observer.disconnect()
   }, [])
 
   return (
-    <HelmetProvider>
-      <Helmet>
-        <title>Torikul Islam Naeem — Full Stack Developer</title>
-        <meta name="description" content="Full stack developer crafting high-performance websites and digital experiences that win trust. Based in Bangladesh, specializing in React, WordPress, Shopify, and MERN stack." />
-        <meta name="keywords" content="full stack developer, web developer, Bangladesh, React, Next.js, WordPress, Shopify, MERN stack, Node.js" />
-        <meta property="og:title" content="Torikul Islam Naeem — Full Stack Developer" />
-        <meta property="og:description" content="Full stack developer crafting high-performance websites and digital products that earn trust from the first click." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://torikul-islam-portfolio.vercel.app" />
-        <link rel="canonical" href="https://torikul-islam-portfolio.vercel.app" />
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="Torikul Islam Naeem" />
-      </Helmet>
-
+    <div className="app">
       <Cursor />
       <ScrollProgress />
       <Navbar />
-
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Work />
-        <Testimonials />
-        <Skills />
-        <Contact />
-      </main>
-
+      <Hero />
+      <About />
+      <Skills />
+      <Work />
+      <Services />
+      <Testimonials />
+      <Contact />
       <Footer />
-    </HelmetProvider>
+    </div>
   )
 }
-
-export default App

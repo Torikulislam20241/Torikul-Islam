@@ -1,189 +1,72 @@
-import { useState } from 'react'
-
 const projects = [
   {
-    id: 1,
-    featured: true,
-    cat: 'web',
-    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&auto=format&fit=crop',
-    alt: 'Online Food Ordering System',
-    type: 'Featured · Web App',
-    year: '2025',
-    title: 'Online Food Ordering System',
-    desc: 'Designed an intuitive Food Ordering System, emphasizing clarity and user efficiency.',
-    stack: ['WordPress', 'Elementor', 'Hostinger', 'WooCommerce'],
-    link: 'https://lokalexpressgrill.com/',
-    linkLabel: 'View Live ↗',
+    title: 'PaawVital',
+    description:
+      'Shopify dropshipping store for pet care products. Targeting US, Canada & NZ markets.',
+    tags: ['Shopify', 'Liquid', 'CJdropshipping'],
   },
   {
-    id: 2,
-    featured: false,
-    cat: 'ecom',
-    img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop',
-    alt: 'Farming Website',
-    type: 'Business',
-    year: '2026',
-    title: 'Farming Website',
-    desc: 'Developed a modern Farming Website that sells a variety of farming products with a focus on usability and seamless navigation for end users.',
-    stack: ['WordPress', 'Elementor', 'WooCommerce'],
-    link: 'https://mollahauto.com/',
-    linkLabel: 'View Live ↗',
+    title: 'Torikul Islam Portfolio',
+    description: 'Personal developer portfolio with React + Vite, deployed on Vercel.',
+    tags: ['React', 'Vite', 'CSS3', 'Vercel'],
   },
   {
-    id: 3,
-    featured: false,
-    cat: 'design',
-    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop',
-    alt: 'POS System',
-    type: 'POS',
-    year: '2025',
-    title: 'Developed a POS System to Manage Sales',
-    desc: 'Created a responsive dashboard layout that manages sales smoothly across devices and screen sizes.',
-    stack: ['PHP', 'Bootstrap', 'Laravel', 'API', 'SQL'],
-    link: 'https://pos.mollahauto.com/',
-    linkLabel: 'View Live ↗',
+    title: 'Google Merchant Center MCP',
+    description:
+      'Custom Python MCP server integrating Claude AI with Google Merchant Center API.',
+    tags: ['Python', 'FastMCP', 'Google API', 'Claude AI'],
   },
   {
-    id: 4,
-    featured: false,
-    cat: 'web',
-    img: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80&auto=format&fit=crop',
-    alt: 'Business Website',
-    type: 'Web App · Dashboard',
-    year: '2025',
-    title: 'Business Website',
-    desc: 'Improved user experience through strategic workflow streamlining and comprehensive interface component optimization.',
-    stack: ['WordPress', 'Elementor', 'Hostinger'],
-    link: 'https://medullaocean.com/',
-    linkLabel: 'Get in Touch ↗',
+    title: 'Skye Commercial Company',
+    description: 'Custom WordPress theme built from scratch with navy/gold palette.',
+    tags: ['WordPress', 'PHP', 'CSS3'],
   },
-]
-
-const filters = [
-  { id: 'all',    label: 'All' },
-  { id: 'web',   label: 'Web Apps' },
-  { id: 'design',label: 'Design' },
-  { id: 'ecom',  label: 'E-Commerce' },
+  {
+    title: 'Essex Muslim Centre',
+    description: 'Client website proposal and build with a clean CMS workflow.',
+    tags: ['WordPress', 'Elementor', 'SEO'],
+  },
+  {
+    title: 'MERN Stack App',
+    description: 'Full-stack web application with authentication, REST API and MongoDB.',
+    tags: ['MongoDB', 'Express', 'React', 'Node.js'],
+  },
 ]
 
 export default function Work() {
-  const [activeFilter, setActiveFilter] = useState('all')
-
-  const visible = activeFilter === 'all'
-    ? projects
-    : projects.filter((p) => p.cat === activeFilter)
-
   return (
-    <section id="work" className="section-pad" aria-label="Portfolio work">
+    <section id="work" className="section work-section">
       <div className="container">
-
-        {/* Header row */}
-        <div className="work-heading-row reveal">
-          <div>
-            <div className="section-label" aria-hidden="true">Portfolio</div>
-            <h2 className="section-title">Selected work</h2>
-          </div>
-          <div className="work-filter" role="group" aria-label="Filter projects">
-            {filters.map((f) => (
-              <button
-                key={f.id}
-                className={`filter-btn${activeFilter === f.id ? ' active' : ''}`}
-                onClick={() => setActiveFilter(f.id)}
-                aria-pressed={activeFilter === f.id}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
+        <div className="section-header reveal">
+          <p className="section-subtitle">My Work</p>
+          <h2 className="section-title">My Work</h2>
         </div>
 
-        {/* Projects grid */}
-        <div className="row g-4">
-          {visible.map((p) =>
-            p.featured ? (
-              /* ── Featured: full-width, image + body side by side ── */
-              <div key={p.id} className="col-12 reveal">
-                <article className="project-card featured" aria-label={p.title}>
-                  <div className="row g-0 h-100">
-                    <div className="col-md-6">
-                      <div className="project-img-wrap h-100">
-                        <img
-                          className="project-img"
-                          src={p.img}
-                          alt={p.alt}
-                          loading="lazy"
-                        />
-                        <div className="project-overlay">
-                          <a
-                            href={p.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="project-overlay-btn"
-                          >
-                            {p.linkLabel}
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="project-body">
-                        <div className="project-meta">
-                          <span className="project-type">{p.type}</span>
-                          <span className="project-year">{p.year}</span>
-                        </div>
-                        <div className="project-title">{p.title}</div>
-                        <div className="project-desc">{p.desc}</div>
-                        <div className="project-stack" aria-label="Tech stack">
-                          {p.stack.map((t) => (
-                            <span key={t} className="stack-tag">{t}</span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+        <div className="work-grid">
+          {projects.map((project, index) => (
+            <article
+              className="project-card reveal"
+              key={project.title}
+              style={{ '--delay': `${index * 80}ms` }}
+            >
+              <div className="project-tags" aria-label={`${project.title} tech stack`}>
+                {project.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
               </div>
-            ) : (
-              /* ── Regular: half-width card ── */
-              <div key={p.id} className="col-md-6 reveal">
-                <article className="project-card" aria-label={p.title}>
-                  <div className="project-img-wrap">
-                    <img
-                      className="project-img"
-                      src={p.img}
-                      alt={p.alt}
-                      loading="lazy"
-                    />
-                    <div className="project-overlay">
-                      <a
-                        href={p.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-overlay-btn"
-                      >
-                        {p.linkLabel}
-                      </a>
-                    </div>
-                  </div>
-                  <div className="project-body">
-                    <div className="project-meta">
-                      <span className="project-type">{p.type}</span>
-                      <span className="project-year">{p.year}</span>
-                    </div>
-                    <div className="project-title">{p.title}</div>
-                    <div className="project-desc">{p.desc}</div>
-                    <div className="project-stack" aria-label="Tech stack">
-                      {p.stack.map((t) => (
-                        <span key={t} className="stack-tag">{t}</span>
-                      ))}
-                    </div>
-                  </div>
-                </article>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <div className="project-actions">
+                <a href="#" aria-label={`${project.title} live demo`}>
+                  🔗 Live Demo
+                </a>
+                <a href="#" aria-label={`${project.title} GitHub repository`}>
+                  <span aria-hidden="true">{'</>'}</span> GitHub
+                </a>
               </div>
-            )
-          )}
+            </article>
+          ))}
         </div>
-
       </div>
     </section>
   )

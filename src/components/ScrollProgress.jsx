@@ -1,20 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function ScrollProgress() {
-  useEffect(() => {
-    const prog = document.getElementById('scroll-progress')
-    if (!prog) return
+  const [progress, setProgress] = useState(0)
 
-    const handleScroll = () => {
-      const scrolled = window.scrollY
-      const total = document.body.scrollHeight - window.innerHeight
-      const pct = total > 0 ? (scrolled / total) * 100 : 0
-      prog.style.width = pct + '%'
+  useEffect(() => {
+    const updateProgress = () => {
+      const scrollTop = window.scrollY
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+      const currentProgress = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0
+      setProgress(Math.min(currentProgress, 100))
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    updateProgress()
+    window.addEventListener('scroll', updateProgress, { passive: true })
+    window.addEventListener('resize', updateProgress)
+
+    return () => {
+      window.removeEventListener('scroll', updateProgress)
+      window.removeEventListener('resize', updateProgress)
+    }
   }, [])
 
-  return <div className="scroll-progress" id="scroll-progress" aria-hidden="true" />
+  return <div className="scroll-progress" style={{ width: `${progress}%` }} />
 }

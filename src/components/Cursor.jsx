@@ -1,42 +1,84 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
+const interactiveSelector = 'a, button, input, textarea, select, [role="button"]'
 
 export default function Cursor() {
+  const [enabled, setEnabled] = useState(false)
+  const [dot, setDot] = useState({ x: 0, y: 0 })
+  const [ring, setRing] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false)
+  const [hasMoved, setHasMoved] = useState(false)
+
   useEffect(() => {
-    const cursor = document.getElementById('cursor')
-    const ring = document.getElementById('cursor-ring')
-    if (!cursor || !ring) return
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    if (isTouchDevice) return undefined
 
-    let mx = 0, my = 0, rx = 0, ry = 0
-    let animFrame
+    const originalCursor = document.body.style.cursor
+    document.body.style.cursor = 'none'
+    document.body.classList.add('custom-cursor-enabled')
+    setEnabled(true)
 
-    const handleMouseMove = (e) => {
-      mx = e.clientX
-      my = e.clientY
-      cursor.style.left = mx + 'px'
-      cursor.style.top = my + 'px'
+    const handleMouseMove = (event) => {
+      setHasMoved(true)
+      setDot({ x: event.clientX, y: event.clientY })
     }
 
-    function animRing() {
-      rx += (mx - rx) * 0.12
-      ry += (my - ry) * 0.12
-      ring.style.left = rx + 'px'
-      ring.style.top = ry + 'px'
-      animFrame = requestAnimationFrame(animRing)
+    const handleMouseOver = (event) => {
+      if (event.target.closest(interactiveSelector)) {
+        setIsHovering(true)
+      }
     }
 
-    document.addEventListener('mousemove', handleMouseMove)
-    animRing()
+    const handleMouseOut = (event) => {
+      if (
+        event.target.closest(interactiveSelector) &&
+        !event.relatedTarget?.closest?.(interactiveSelector)
+      ) {
+        setIsHovering(false)
+      }
+    }
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    document.addEventListener('mouseover', handleMouseOver)
+    document.addEventListener('mouseout', handleMouseOut)
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      cancelAnimationFrame(animFrame)
+      window.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseover', handleMouseOver)
+      document.removeEventListener('mouseout', handleMouseOut)
+      document.body.style.cursor = originalCursor
+      document.body.classList.remove('custom-cursor-enabled')
     }
   }, [])
 
+  useEffect(() => {
+    if (!enabled) return undefined
+
+    let frameId
+    const follow = () => {
+      setRing((current) => ({
+        x: current.x + (dot.x - current.x) * 0.16,
+        y: current.y + (dot.y - current.y) * 0.16,
+      }))
+      frameId = requestAnimationFrame(follow)
+    }
+
+    frameId = requestAnimationFrame(follow)
+    return () => cancelAnimationFrame(frameId)
+  }, [dot.x, dot.y, enabled])
+
+  if (!enabled || !hasMoved) return null
+
   return (
     <>
-      <div className="cursor" id="cursor" aria-hidden="true" />
-      <div className="cursor-ring" id="cursor-ring" aria-hidden="true" />
+      <span
+        className={`cursor-dot ${isHovering ? 'hovering' : ''}`}
+        style={{ transform: `translate3d(${dot.x}px, ${dot.y}px, 0)` }}
+      />
+      <span
+        className={`cursor-ring ${isHovering ? 'hovering' : ''}`}
+        style={{ transform: `translate3d(${ring.x}px, ${ring.y}px, 0)` }}
+      />
     </>
   )
 }

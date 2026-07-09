@@ -1,71 +1,99 @@
 import { useEffect, useState } from 'react'
 
+const navLinks = [
+  { href: '#about', label: 'About', id: 'about' },
+  { href: '#skills', label: 'Skills', id: 'skills' },
+  { href: '#work', label: 'Work', id: 'work' },
+  { href: '#services', label: 'Services', id: 'services' },
+  { href: '#contact', label: 'Contact', id: 'contact' },
+]
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('about')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 50)
+    onScroll()
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Prevent body scroll when mobile nav is open
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [mobileOpen])
+    const sections = navLinks
+      .map((link) => document.getElementById(link.id))
+      .filter(Boolean)
 
-  const closeMobile = () => setMobileOpen(false)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: '-35% 0px -55% 0px', threshold: 0 },
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', menuOpen)
+    return () => document.body.classList.remove('menu-open')
+  }, [menuOpen])
+
+  const closeMenu = () => setMenuOpen(false)
 
   return (
-    <>
-      <nav id="navbar" className={scrolled ? 'scrolled' : ''} role="navigation" aria-label="Main navigation">
-        <a href="#home" className="nav-logo" aria-label="Torikul Islam Naeem – Home">
-          TI<span>.</span>Naeem
+    <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
+      <div className="container navbar-inner">
+        <a className="navbar-brand" href="#hero" onClick={closeMenu}>
+          Tariqul Islam
         </a>
 
-        <ul className="nav-links" role="list">
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <a href="#contact" className="nav-cta" aria-label="Hire Torikul">Hire Me</a>
+        <nav className="nav-links" aria-label="Primary navigation">
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={link.href}
+              className={activeSection === link.id ? 'active' : ''}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
         <button
-          className="nav-hamburger"
-          onClick={() => setMobileOpen(true)}
-          aria-label="Open mobile menu"
-          aria-expanded={mobileOpen}
+          className={`menu-toggle ${menuOpen ? 'open' : ''}`}
+          type="button"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((current) => !current)}
         >
           <span />
           <span />
           <span />
         </button>
-      </nav>
-
-      {/* Mobile Navigation Overlay */}
-      <div
-        className={`mobile-nav${mobileOpen ? ' open' : ''}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile navigation"
-      >
-        <button
-          className="mobile-nav-close"
-          onClick={closeMobile}
-          aria-label="Close mobile menu"
-        >
-          ✕
-        </button>
-        <a href="#home"     onClick={closeMobile}>Home</a>
-        <a href="#about"    onClick={closeMobile}>About</a>
-        <a href="#services" onClick={closeMobile}>Services</a>
-        <a href="#work"     onClick={closeMobile}>Work</a>
-        <a href="#contact"  onClick={closeMobile}>Contact</a>
       </div>
-    </>
+
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
+        <nav className="mobile-menu-links" aria-label="Mobile navigation">
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={link.href}
+              className={activeSection === link.id ? 'active' : ''}
+              onClick={closeMenu}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
   )
 }
