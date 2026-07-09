@@ -24,22 +24,26 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="section testimonials-section">
+    <section className="page-section testimonials-section" aria-label="Client testimonials">
       <div className="container">
-        <div className="section-header reveal">
-          <p className="section-subtitle">Client Feedback</p>
-          <h2 className="section-title">The work speaks through real experiences</h2>
+        <div className="page-heading reveal visible">
+          <span>Client Feedback</span>
+          <h1>The work speaks through real experiences.</h1>
+          <p>
+            Feedback from clients and collaborators across business, e-commerce,
+            and web application projects.
+          </p>
         </div>
 
         <div className="testimonials-grid">
           {testimonials.map((testimonial, index) => (
             <article
-              className="testimonial-card reveal"
+              className="testimonial-card glass-card reveal"
               key={testimonial.name}
               style={{ '--delay': `${index * 90}ms` }}
             >
               <div className="quote-mark" aria-hidden="true">
-                “
+                "
               </div>
               <div className="testimonial-stars" aria-label="5 stars">
                 {testimonial.stars}

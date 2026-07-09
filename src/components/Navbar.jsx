@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
 
 const navLinks = [
-  { href: '#about', label: 'About', id: 'about' },
-  { href: '#skills', label: 'Skills', id: 'skills' },
-  { href: '#work', label: 'Work', id: 'work' },
-  { href: '#services', label: 'Services', id: 'services' },
-  { href: '#contact', label: 'Contact', id: 'contact' },
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/skills', label: 'Skills' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/services', label: 'Services' },
+  { href: '/testimonials', label: 'Testimonials' },
+  { href: '/contact', label: 'Contact' },
 ]
 
-export default function Navbar() {
+export default function Navbar({ currentPath }) {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('about')
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 50)
+    const onScroll = () => setIsScrolled(window.scrollY > 24)
     onScroll()
 
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -22,50 +23,39 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    const sections = navLinks
-      .map((link) => document.getElementById(link.id))
-      .filter(Boolean)
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-          }
-        })
-      },
-      { rootMargin: '-35% 0px -55% 0px', threshold: 0 },
-    )
-
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
     document.body.classList.toggle('menu-open', menuOpen)
     return () => document.body.classList.remove('menu-open')
   }, [menuOpen])
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [currentPath])
 
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="container navbar-inner">
-        <a className="navbar-brand" href="#hero" onClick={closeMenu}>
-          Tariqul Islam
+        <a className="navbar-brand" href="/" onClick={closeMenu}>
+          <span>Torikul</span>
+          <span>Islam</span>
         </a>
 
         <nav className="nav-links" aria-label="Primary navigation">
           {navLinks.map((link) => (
             <a
-              key={link.id}
+              key={link.href}
               href={link.href}
-              className={activeSection === link.id ? 'active' : ''}
+              className={currentPath === link.href ? 'active' : ''}
             >
               {link.label}
             </a>
           ))}
         </nav>
+
+        <a className="nav-cta" href="/contact">
+          Hire Me
+        </a>
 
         <button
           className={`menu-toggle ${menuOpen ? 'open' : ''}`}
@@ -84,9 +74,9 @@ export default function Navbar() {
         <nav className="mobile-menu-links" aria-label="Mobile navigation">
           {navLinks.map((link) => (
             <a
-              key={link.id}
+              key={link.href}
               href={link.href}
-              className={activeSection === link.id ? 'active' : ''}
+              className={currentPath === link.href ? 'active' : ''}
               onClick={closeMenu}
             >
               {link.label}

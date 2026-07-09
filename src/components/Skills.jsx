@@ -1,53 +1,23 @@
 const skillGroups = [
   {
     title: 'Frontend',
-    skills: [
-      ['⚛️', 'React.js'],
-      ['⚡', 'JavaScript (ES6+)'],
-      ['🏗️', 'HTML5'],
-      ['🎨', 'CSS3'],
-      ['🧩', 'Bootstrap 5'],
-      ['🌬️', 'Tailwind CSS'],
-    ],
+    skills: ['React.js', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Bootstrap 5', 'Tailwind CSS'],
   },
   {
     title: 'Backend',
-    skills: [
-      ['🟢', 'Node.js'],
-      ['🚏', 'Express.js'],
-      ['🐍', 'Python'],
-      ['🐘', 'PHP'],
-    ],
+    skills: ['Node.js', 'Express.js', 'Python', 'PHP'],
   },
   {
     title: 'CMS & E-commerce',
-    skills: [
-      ['📝', 'WordPress'],
-      ['🛒', 'Shopify (Liquid)'],
-      ['📦', 'WooCommerce'],
-      ['🚚', 'CJdropshipping'],
-    ],
+    skills: ['WordPress', 'Shopify (Liquid)', 'WooCommerce', 'CJdropshipping'],
   },
   {
     title: 'Database & Tools',
-    skills: [
-      ['🍃', 'MongoDB'],
-      ['🗄️', 'MySQL'],
-      ['🔧', 'Git'],
-      ['🐙', 'GitHub'],
-      ['🔌', 'REST APIs'],
-      ['📮', 'Postman'],
-    ],
+    skills: ['MongoDB', 'MySQL', 'Git', 'GitHub', 'REST APIs', 'Postman'],
   },
   {
     title: 'Design & Deployment',
-    skills: [
-      ['✏️', 'Figma (basic)'],
-      ['▲', 'Vercel'],
-      ['🖥️', 'cPanel'],
-      ['📊', 'Google Analytics'],
-      ['📣', 'Meta Ads Manager'],
-    ],
+    skills: ['Figma (basic)', 'Vercel', 'cPanel', 'Google Analytics', 'Meta Ads Manager'],
   },
 ]
 
@@ -55,34 +25,37 @@ export default function Skills() {
   let delayIndex = 0
 
   return (
-    <section id="skills" className="section skills-section">
+    <section className="page-section skills-section" aria-label="Technical Skills">
       <div className="container">
-        <div className="section-header reveal">
-          <p className="section-subtitle">Technical Skills</p>
-          <h2 className="section-title">Technical Skills</h2>
+        <div className="page-heading reveal visible">
+          <span>My Expertise</span>
+          <h1>Skills and technologies I use to ship reliable websites.</h1>
+          <p>
+            A practical stack for client websites, online stores, full-stack apps,
+            tracking, deployment, and performance improvements.
+          </p>
         </div>
 
         <div className="skills-groups">
           {skillGroups.map((group) => (
-            <div className="skills-group" key={group.title}>
-              <h3 className="skills-group-title reveal">{group.title}</h3>
+            <section className="skills-group glass-card reveal" key={group.title}>
+              <h2>{group.title}</h2>
               <div className="skills-list">
-                {group.skills.map(([icon, skill]) => {
+                {group.skills.map((skill) => {
                   delayIndex += 1
 
                   return (
                     <span
-                      className="skill-badge reveal"
+                      className="skill-badge"
                       key={skill}
-                      style={{ '--delay': `${delayIndex * 45}ms` }}
+                      style={{ '--delay': `${delayIndex * 35}ms` }}
                     >
-                      <span aria-hidden="true">{icon}</span>
                       {skill}
                     </span>
                   )
                 })}
               </div>
-            </div>
+            </section>
           ))}
         </div>
       </div>

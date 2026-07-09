@@ -20,10 +20,10 @@ const initialForm = {
 }
 
 const socialLinks = [
-  { href: 'https://github.com/Torikulislam20241', icon: '🐙', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/torikul-islam-naeem/', icon: '💼', label: 'LinkedIn' },
-  { href: 'https://www.upwork.com/', icon: '↗', label: 'Upwork' },
-  { href: 'https://www.fiverr.com/', icon: '↗', label: 'Fiverr' },
+  { href: 'https://github.com/Torikulislam20241', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/torikul-islam-naeem/', label: 'LinkedIn' },
+  { href: 'https://www.upwork.com/', label: 'Upwork' },
+  { href: 'https://www.fiverr.com/', label: 'Fiverr' },
 ]
 
 export default function Contact() {
@@ -57,14 +57,13 @@ export default function Contact() {
 
       setStatus({
         type: 'success',
-        message: "✅ Message sent! I'll get back to you within 24 hours.",
+        message: "Message sent. I'll get back to you within 24 hours.",
       })
       setForm(initialForm)
     } catch (error) {
       setStatus({
         type: 'error',
-        message:
-          '❌ Something went wrong. Please email me directly at naeemislam0252@gmail.com',
+        message: 'Something went wrong. Please email me directly at naeemislam0252@gmail.com',
       })
     } finally {
       setIsSending(false)
@@ -72,34 +71,29 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section contact-section">
+    <section className="page-section contact-section" aria-label="Contact">
       <div className="container">
-        <div className="section-header reveal">
-          <p className="section-subtitle">Get In Touch</p>
-          <h2 className="section-title">Get In Touch</h2>
+        <div className="page-heading reveal visible">
+          <span>Get In Touch</span>
+          <h1>Let's build something useful together.</h1>
+          <p>
+            Have a project in mind? Send a message and I will get back to you
+            within 24 hours.
+          </p>
         </div>
 
         <div className="contact-grid">
-          <div className="contact-info reveal">
-            <h3>Let's Work Together</h3>
+          <div className="contact-info glass-card reveal">
+            <h2>Contact details</h2>
             <p>
-              Have a project in mind? I'd love to hear about it. Send me a message
-              and I'll get back to you within 24 hours.
+              I work with founders, small businesses, e-commerce teams, and
+              community organizations that need reliable web execution.
             </p>
 
             <div className="contact-details">
-              <a href="mailto:naeemislam0252@gmail.com">
-                <span aria-hidden="true">📧</span>
-                naeemislam0252@gmail.com
-              </a>
-              <div>
-                <span aria-hidden="true">📍</span>
-                Dhaka, Bangladesh
-              </div>
-              <div>
-                <span aria-hidden="true">⏰</span>
-                Response within 24 hours
-              </div>
+              <a href="mailto:naeemislam0252@gmail.com">naeemislam0252@gmail.com</a>
+              <span>Dhaka, Bangladesh</span>
+              <span>Response within 24 hours</span>
             </div>
 
             <div className="contact-socials" aria-label="Social links">
@@ -110,14 +104,13 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span aria-hidden="true">{link.icon}</span>
                   {link.label}
                 </a>
               ))}
             </div>
           </div>
 
-          <form className="contact-form reveal" onSubmit={handleSubmit}>
+          <form className="contact-form glass-card reveal" onSubmit={handleSubmit}>
             {status.message && (
               <div className={`form-banner ${status.type}`} role="status">
                 {status.message}
@@ -176,7 +169,7 @@ export default function Contact() {
             </div>
 
             <button className="btn-primary contact-submit" type="submit" disabled={isSending}>
-              {isSending ? 'Sending...' : 'Send Message →'}
+              {isSending ? 'Sending...' : 'Send Message ->'}
             </button>
           </form>
         </div>

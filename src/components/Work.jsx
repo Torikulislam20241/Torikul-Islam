@@ -1,7 +1,7 @@
 const projects = [
   {
     title: 'Online Food Ordering System',
-    type: 'Featured · Web App',
+    type: 'Featured Web App',
     year: '2025',
     description:
       'Designed an intuitive Food Ordering System, emphasizing clarity and user efficiency.',
@@ -28,44 +28,66 @@ const projects = [
   },
   {
     title: 'Business Website',
-    type: 'Web App · Dashboard',
+    type: 'Web App Dashboard',
     year: '2025',
     description:
       'Improved user experience through strategic workflow streamlining and comprehensive interface component optimization.',
     tags: ['WordPress', 'Elementor', 'Hostinger'],
     link: 'https://medullaocean.com/',
   },
+  {
+    title: 'PaawVital',
+    type: 'Shopify E-commerce',
+    year: '2026',
+    description:
+      'Built a Shopify pet care store for grooming tools and smart essentials, with product sections, trust messaging, shipping guarantees, and a conversion-focused storefront for dog and cat owners.',
+    tags: ['Shopify', 'Liquid', 'E-commerce', 'Pet Care'],
+    link: 'https://paawvital.com/',
+  },
+  {
+    title: 'Essex Muslim Centre',
+    type: 'Community Website',
+    year: '2026',
+    description:
+      'Developed a community and charity website with prayer-time sections, service pages, events, donation calls to action, and clear navigation for Chelmsford worshippers.',
+    tags: ['WordPress', 'Community', 'Events', 'Charity'],
+    link: 'https://slategray-wren-213577.hostingersite.com/',
+  },
 ]
 
 export default function Work() {
   return (
-    <section id="work" className="section work-section">
+    <section className="page-section work-section" aria-label="Projects">
       <div className="container">
-        <div className="section-header reveal">
-          <p className="section-subtitle">My Work</p>
-          <h2 className="section-title">My Work</h2>
+        <div className="page-heading reveal visible">
+          <span>Selected Work</span>
+          <h1>Projects built for real businesses and communities.</h1>
+          <p>
+            A focused collection of websites, e-commerce stores, dashboards, and
+            client builds with live project links.
+          </p>
         </div>
 
         <div className="work-grid">
           {projects.map((project, index) => (
             <article
-              className="project-card reveal"
+              className="project-card glass-card reveal"
               key={project.title}
-              style={{ '--delay': `${index * 80}ms` }}
+              style={{ '--delay': `${index * 70}ms` }}
             >
               <div className="project-meta-line">
                 <span>{project.type}</span>
                 <span>{project.year}</span>
               </div>
 
+              <h2>{project.title}</h2>
+              <p>{project.description}</p>
+
               <div className="project-tags" aria-label={`${project.title} tech stack`}>
                 {project.tags.map((tag) => (
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
-
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
 
               <div className="project-actions">
                 <a
@@ -76,8 +98,8 @@ export default function Work() {
                 >
                   Live Project
                 </a>
-                <a href="#contact" aria-label={`Contact Tariqul about ${project.title}`}>
-                  Discuss Similar Project
+                <a href="/contact" aria-label={`Contact Torikul about ${project.title}`}>
+                  Start Similar Project
                 </a>
               </div>
             </article>

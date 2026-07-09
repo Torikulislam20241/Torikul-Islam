@@ -1,6 +1,5 @@
 const services = [
   {
-    icon: '🛒',
     title: 'Shopify Development',
     description: 'Conversion-focused Shopify builds for stores that need to launch cleanly.',
     deliverables: [
@@ -11,7 +10,6 @@ const services = [
     ],
   },
   {
-    icon: '🌐',
     title: 'WordPress Development',
     description: 'Custom WordPress sites that are easy to manage and built for speed.',
     deliverables: [
@@ -22,7 +20,6 @@ const services = [
     ],
   },
   {
-    icon: '⚛️',
     title: 'MERN Stack Development',
     description: 'Modern full-stack applications with reliable APIs and responsive UI.',
     deliverables: [
@@ -33,7 +30,6 @@ const services = [
     ],
   },
   {
-    icon: '📈',
     title: 'E-commerce Setup',
     description: 'Complete store launch support from catalog to checkout readiness.',
     deliverables: [
@@ -44,7 +40,6 @@ const services = [
     ],
   },
   {
-    icon: '🔍',
     title: 'SEO & Performance',
     description: 'Technical improvements that make websites faster and easier to discover.',
     deliverables: [
@@ -55,7 +50,6 @@ const services = [
     ],
   },
   {
-    icon: '🤖',
     title: 'AI & Automation',
     description: 'Practical automation for business workflows and API-driven systems.',
     deliverables: [
@@ -69,24 +63,28 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="section services-section">
+    <section className="page-section services-section" aria-label="Services">
       <div className="container">
-        <div className="section-header reveal">
-          <p className="section-subtitle">Services</p>
-          <h2 className="section-title">Services</h2>
+        <div className="page-heading reveal visible">
+          <span>What I Do</span>
+          <h1>Services for websites, stores, and web applications.</h1>
+          <p>
+            From idea to deployment, I provide focused development services for
+            businesses that need clean execution.
+          </p>
         </div>
 
         <div className="services-grid">
           {services.map((service, index) => (
             <article
-              className="service-card reveal"
+              className="service-card glass-card reveal"
               key={service.title}
-              style={{ '--delay': `${index * 80}ms` }}
+              style={{ '--delay': `${index * 70}ms` }}
             >
-              <div className="service-icon" aria-hidden="true">
-                {service.icon}
+              <div className="service-number" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
               </div>
-              <h3>{service.title}</h3>
+              <h2>{service.title}</h2>
               <p>{service.description}</p>
               <ul>
                 {service.deliverables.map((item) => (
@@ -95,6 +93,12 @@ export default function Services() {
               </ul>
             </article>
           ))}
+        </div>
+
+        <div className="page-cta reveal">
+          <a className="btn-primary" href="/contact">
+            Discuss Your Project
+          </a>
         </div>
       </div>
     </section>
