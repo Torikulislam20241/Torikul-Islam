@@ -53,7 +53,7 @@ export default function Navbar() {
     <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="container navbar-inner">
         <a className="navbar-brand" href="#hero" onClick={closeMenu}>
-          Torikul<span>.</span>
+          Torikul Islam
         </a>
 
         <nav className="nav-links" aria-label="Primary navigation">

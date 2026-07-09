@@ -22,7 +22,7 @@ export default function Hero() {
           </div>
 
           <h1>
-            <span>Torikul</span>
+            <span>Torikul Islam</span>
             <br />
             I Build Digital Experiences
           </h1>

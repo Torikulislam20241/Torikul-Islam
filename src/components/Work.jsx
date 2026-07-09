@@ -98,7 +98,7 @@ export default function Work() {
                 >
                   Live Project
                 </a>
-                <a href="#contact" aria-label={`Contact Torikul about ${project.title}`}>
+                <a href="#contact" aria-label={`Contact Torikul Islam about ${project.title}`}>
                   Start Similar Project
                 </a>
               </div>
