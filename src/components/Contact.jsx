@@ -3,14 +3,19 @@
   1. Create an account at https://www.emailjs.com/ and add an email service connected to naeemislam0252@gmail.com.
   2. Create an EmailJS email template with variables: from_name, from_email, subject, message, and to_email.
   3. Copy your Service ID, Template ID, and Public Key from the EmailJS dashboard.
-  4. Replace SERVICE_ID, TEMPLATE_ID, and USER_ID below with your real values before going live.
+  4. Add them as Vite env vars: VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY.
 */
 import { useState } from 'react'
 import emailjs from 'emailjs-com'
 
-const SERVICE_ID = 'YOUR_SERVICE_ID'
-const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const USER_ID = 'YOUR_PUBLIC_KEY'
+const CONTACT_EMAIL = 'naeemislam0252@gmail.com'
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
+const USER_ID = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+
+const isEmailJsConfigured = [SERVICE_ID, TEMPLATE_ID, USER_ID].every(
+  (value) => value && !value.startsWith('YOUR_'),
+)
 
 const initialForm = {
   name: '',
@@ -25,6 +30,18 @@ const socialLinks = [
   { href: 'https://www.upwork.com/', label: 'Upwork' },
   { href: 'https://www.fiverr.com/', label: 'Fiverr' },
 ]
+
+const buildMailtoUrl = ({ name, email, subject, message }) => {
+  const emailSubject = subject || `Portfolio inquiry from ${name}`
+  const emailBody = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    '',
+    message,
+  ].join('\n')
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
+}
 
 export default function Contact() {
   const [form, setForm] = useState(initialForm)
@@ -41,6 +58,16 @@ export default function Contact() {
     setIsSending(true)
     setStatus({ type: '', message: '' })
 
+    if (!isEmailJsConfigured) {
+      window.location.href = buildMailtoUrl(form)
+      setStatus({
+        type: 'success',
+        message: 'Your email app opened with the message filled in. Please send it from there.',
+      })
+      setIsSending(false)
+      return
+    }
+
     try {
       await emailjs.send(
         SERVICE_ID,
@@ -50,7 +77,7 @@ export default function Contact() {
           from_email: form.email,
           subject: form.subject,
           message: form.message,
-          to_email: 'naeemislam0252@gmail.com',
+          to_email: CONTACT_EMAIL,
         },
         USER_ID,
       )
@@ -61,9 +88,10 @@ export default function Contact() {
       })
       setForm(initialForm)
     } catch (error) {
+      window.location.href = buildMailtoUrl(form)
       setStatus({
-        type: 'error',
-        message: 'Something went wrong. Please email me directly at naeemislam0252@gmail.com',
+        type: 'success',
+        message: 'The direct form send failed, so your email app opened with the message filled in.',
       })
     } finally {
       setIsSending(false)
@@ -91,7 +119,7 @@ export default function Contact() {
             </p>
 
             <div className="contact-details">
-              <a href="mailto:naeemislam0252@gmail.com">naeemislam0252@gmail.com</a>
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
               <span>Dhaka, Bangladesh</span>
               <span>Response within 24 hours</span>
             </div>
