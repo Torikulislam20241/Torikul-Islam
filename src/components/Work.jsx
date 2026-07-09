@@ -1,35 +1,39 @@
 const projects = [
   {
-    title: 'PaawVital',
+    title: 'Online Food Ordering System',
+    type: 'Featured Web App',
+    year: '2025',
     description:
-      'Shopify dropshipping store for pet care products. Targeting US, Canada & NZ markets.',
-    tags: ['Shopify', 'Liquid', 'CJdropshipping'],
+      'Designed an intuitive food ordering system with a clear product flow and fast ordering experience.',
+    tags: ['WordPress', 'Elementor', 'Hostinger', 'WooCommerce'],
+    link: 'https://lokalexpressgrill.com/',
   },
   {
-    title: 'Torikul Islam Portfolio',
-    description: 'Personal developer portfolio with React + Vite, deployed on Vercel.',
-    tags: ['React', 'Vite', 'CSS3', 'Vercel'],
-  },
-  {
-    title: 'Google Merchant Center MCP',
+    title: 'Farming Website',
+    type: 'Business Website',
+    year: '2026',
     description:
-      'Custom Python MCP server integrating Claude AI with Google Merchant Center API.',
-    tags: ['Python', 'FastMCP', 'Google API', 'Claude AI'],
+      'Developed a modern farming website for product sales with a simple, responsive customer journey.',
+    tags: ['WordPress', 'Elementor', 'WooCommerce'],
+    link: 'https://mollahauto.com/',
   },
   {
-    title: 'Skye Commercial Company',
-    description: 'Custom WordPress theme built from scratch with navy/gold palette.',
-    tags: ['WordPress', 'PHP', 'CSS3'],
+    title: 'POS System to Manage Sales',
+    type: 'POS Dashboard',
+    year: '2025',
+    description:
+      'Created a responsive POS dashboard that helps manage sales smoothly across devices and screen sizes.',
+    tags: ['PHP', 'Bootstrap', 'Laravel', 'API', 'SQL'],
+    link: 'https://pos.mollahauto.com/',
   },
   {
-    title: 'Essex Muslim Centre',
-    description: 'Client website proposal and build with a clean CMS workflow.',
-    tags: ['WordPress', 'Elementor', 'SEO'],
-  },
-  {
-    title: 'MERN Stack App',
-    description: 'Full-stack web application with authentication, REST API and MongoDB.',
-    tags: ['MongoDB', 'Express', 'React', 'Node.js'],
+    title: 'Business Website',
+    type: 'Client Website',
+    year: '2025',
+    description:
+      'Improved the website experience with cleaner workflows, optimized interface sections, and a focused business presentation.',
+    tags: ['WordPress', 'Elementor', 'Hostinger'],
+    link: 'https://medullaocean.com/',
   },
 ]
 
@@ -49,19 +53,31 @@ export default function Work() {
               key={project.title}
               style={{ '--delay': `${index * 80}ms` }}
             >
+              <div className="project-meta-line">
+                <span>{project.type}</span>
+                <span>{project.year}</span>
+              </div>
+
               <div className="project-tags" aria-label={`${project.title} tech stack`}>
                 {project.tags.map((tag) => (
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
+
               <h3>{project.title}</h3>
               <p>{project.description}</p>
+
               <div className="project-actions">
-                <a href="#" aria-label={`${project.title} live demo`}>
-                  🔗 Live Demo
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${project.title} live website`}
+                >
+                  Live Project
                 </a>
-                <a href="#" aria-label={`${project.title} GitHub repository`}>
-                  <span aria-hidden="true">{'</>'}</span> GitHub
+                <a href="#contact" aria-label={`Contact Tariqul about ${project.title}`}>
+                  Discuss Similar Project
                 </a>
               </div>
             </article>

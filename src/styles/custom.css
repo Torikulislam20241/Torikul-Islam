@@ -763,6 +763,18 @@ h4 {
   margin-bottom: 20px;
 }
 
+.project-meta-line {
+  align-items: center;
+  color: var(--color-text-secondary);
+  display: flex;
+  font-size: 0.78rem;
+  font-weight: 700;
+  justify-content: space-between;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
 .project-card h3,
 .service-card h3 {
   font-size: 1.25rem;
