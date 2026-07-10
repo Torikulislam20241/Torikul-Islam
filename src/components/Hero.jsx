@@ -34,10 +34,10 @@ export default function Hero() {
           </p>
 
           <div className="hero-actions">
-            <a className="btn-primary" href="#work">
+            <a className="btn-primary" href="/projects">
               View My Work
             </a>
-            <a className="btn-outline" href="#contact">
+            <a className="btn-outline" href="/contact">
               Get In Touch
             </a>
           </div>

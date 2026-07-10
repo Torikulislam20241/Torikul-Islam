@@ -15,12 +15,20 @@ import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function App() {
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/'
   const researchMatch = window.location.pathname.match(/^\/research\/([^/]+)\/?$/)
   const activePaper = researchMatch ? researchPapers.find((paper) => paper.slug === decodeURIComponent(researchMatch[1])) : null
 
   useEffect(() => {
-    document.title = researchMatch ? `${activePaper?.title || 'Research'} | Torikul Islam` : 'Torikul Islam | Full-Stack Developer'
-  }, [activePaper, researchMatch])
+    const pageTitles = {
+      '/': 'Torikul Islam | Full-Stack Developer',
+      '/about': 'About | Torikul Islam',
+      '/projects': 'Projects | Torikul Islam',
+      '/achievements': 'Achievements | Torikul Islam',
+      '/contact': 'Contact | Torikul Islam',
+    }
+    document.title = researchMatch ? `${activePaper?.title || 'Research'} | Torikul Islam` : (pageTitles[currentPath] || 'Page Not Found | Torikul Islam')
+  }, [activePaper, currentPath, researchMatch])
 
   useEffect(() => {
     let observer
@@ -49,21 +57,24 @@ export default function App() {
 
   if (researchMatch) return <ResearchDetail paper={activePaper} />
 
+  const pages = {
+    '/': <><Hero /><Skills /><Services /><Work /><Testimonials /></>,
+    '/about': <About />,
+    '/projects': <Work />,
+    '/achievements': <Achievements />,
+    '/contact': <Contact />,
+  }
+
+  const pageContent = pages[currentPath] || (
+    <section className="page-section not-found-page"><div className="container"><span>404</span><h1>Page not found</h1><p>The page you requested does not exist.</p><a className="btn-primary" href="/">Return home</a></div></section>
+  )
+
   return (
     <div className="app">
       <Cursor />
       <ScrollProgress />
       <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Work />
-        <Achievements />
-        <Services />
-        <Testimonials />
-        <Contact />
-      </main>
+      <main className={currentPath === '/' ? 'home-layout' : 'standalone-page'}>{pageContent}</main>
       <Footer />
     </div>
   )

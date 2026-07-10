@@ -7,6 +7,7 @@ const projects = [
       'Designed an intuitive Food Ordering System, emphasizing clarity and user efficiency.',
     tags: ['WordPress', 'Elementor', 'Hostinger', 'WooCommerce'],
     link: 'https://lokalexpressgrill.com/',
+    image: '',
   },
   {
     title: 'Farming Website',
@@ -16,6 +17,7 @@ const projects = [
       'Developed a modern Farming Website that sells a variety of farming products with a focus on usability and seamless navigation for end users.',
     tags: ['WordPress', 'Elementor', 'WooCommerce'],
     link: 'https://mollahauto.com/',
+    image: '/projects/project-2.png',
   },
   {
     title: 'Developed a POS System to Manage Sales',
@@ -25,6 +27,7 @@ const projects = [
       'Created a responsive dashboard layout that manages sales smoothly across devices and screen sizes.',
     tags: ['PHP', 'Bootstrap', 'Laravel', 'API', 'SQL'],
     link: 'https://pos.mollahauto.com/',
+    image: '/projects/project-3.png',
   },
   {
     title: 'Business Website',
@@ -34,6 +37,7 @@ const projects = [
       'Improved user experience through strategic workflow streamlining and comprehensive interface component optimization.',
     tags: ['WordPress', 'Elementor', 'Hostinger'],
     link: 'https://medullaocean.com/',
+    image: '/projects/project-4.png',
   },
   {
     title: 'PaawVital',
@@ -43,6 +47,7 @@ const projects = [
       'Built a Shopify pet care store for grooming tools and smart essentials, with product sections, trust messaging, shipping guarantees, and a conversion-focused storefront for dog and cat owners.',
     tags: ['Shopify', 'Liquid', 'E-commerce', 'Pet Care'],
     link: 'https://paawvital.com/',
+    image: '/projects/project-5.jpg',
   },
   {
     title: 'Essex Muslim Centre',
@@ -52,6 +57,7 @@ const projects = [
       'Developed a community and charity website with prayer-time sections, service pages, events, donation calls to action, and clear navigation for Chelmsford worshippers.',
     tags: ['WordPress', 'Community', 'Events', 'Charity'],
     link: 'https://slategray-wren-213577.hostingersite.com/',
+    image: '/projects/project-6.png',
   },
 ]
 
@@ -75,8 +81,8 @@ export default function Work() {
               key={project.title}
               style={{ '--delay': `${index * 70}ms` }}
           >
-              <div className={`project-preview project-preview-${(index % 3) + 1}`} aria-hidden="true">
-                <div className="preview-browser"><span /><span /><span /><div /></div>
+              <div className={`project-preview project-preview-${(index % 3) + 1}`}>
+                {project.image ? <img src={project.image} alt={`${project.title} website preview`} loading="lazy" /> : <div className="project-preview-fallback"><span>Live project</span><strong>{project.title}</strong></div>}
               </div>
               <div className="project-card-body">
               <div className="project-meta-line">
@@ -102,7 +108,7 @@ export default function Work() {
                 >
                   Live Project
                 </a>
-                <a href="#contact" aria-label={`Contact Torikul Islam about ${project.title}`}>
+                <a href="/contact" aria-label={`Contact Torikul Islam about ${project.title}`}>
                   Start Similar Project
                 </a>
               </div>

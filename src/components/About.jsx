@@ -42,10 +42,10 @@ export default function About() {
             </div>
 
             <div className="about-actions">
-              <a className="btn-primary" href="#contact">
+              <a className="btn-primary" href="/contact">
                 Hire Me
               </a>
-              <a className="btn-outline" href="#work">
+              <a className="btn-outline" href="/projects">
                 See Projects
               </a>
             </div>

@@ -96,7 +96,7 @@ export default function Services() {
         </div>
 
         <div className="page-cta reveal">
-          <a className="btn-primary" href="#contact">
+          <a className="btn-primary" href="/contact">
             Discuss Your Project
           </a>
         </div>
