@@ -74,7 +74,11 @@ export default function Work() {
               className="project-card glass-card reveal"
               key={project.title}
               style={{ '--delay': `${index * 70}ms` }}
-            >
+          >
+              <div className={`project-preview project-preview-${(index % 3) + 1}`} aria-hidden="true">
+                <div className="preview-browser"><span /><span /><span /><div /></div>
+              </div>
+              <div className="project-card-body">
               <div className="project-meta-line">
                 <span>{project.type}</span>
                 <span>{project.year}</span>
@@ -101,6 +105,7 @@ export default function Work() {
                 <a href="#contact" aria-label={`Contact Torikul Islam about ${project.title}`}>
                   Start Similar Project
                 </a>
+              </div>
               </div>
             </article>
           ))}

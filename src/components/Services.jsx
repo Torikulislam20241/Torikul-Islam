@@ -1,6 +1,8 @@
+import TechIcon from './TechIcon.jsx'
+
 const services = [
   {
-    title: 'Shopify Development',
+    icon: 'cart', title: 'Shopify Development',
     description: 'Conversion-focused Shopify builds for stores that need to launch cleanly.',
     deliverables: [
       'Custom Liquid themes',
@@ -10,7 +12,7 @@ const services = [
     ],
   },
   {
-    title: 'WordPress Development',
+    icon: 'layout', title: 'WordPress Development',
     description: 'Custom WordPress sites that are easy to manage and built for speed.',
     deliverables: [
       'Custom themes from scratch',
@@ -20,7 +22,7 @@ const services = [
     ],
   },
   {
-    title: 'MERN Stack Development',
+    icon: 'code', title: 'MERN Stack Development',
     description: 'Modern full-stack applications with reliable APIs and responsive UI.',
     deliverables: [
       'React frontend',
@@ -30,7 +32,7 @@ const services = [
     ],
   },
   {
-    title: 'E-commerce Setup',
+    icon: 'server', title: 'E-commerce Setup',
     description: 'Complete store launch support from catalog to checkout readiness.',
     deliverables: [
       'Product setup',
@@ -40,7 +42,7 @@ const services = [
     ],
   },
   {
-    title: 'SEO & Performance',
+    icon: 'speed', title: 'SEO & Performance',
     description: 'Technical improvements that make websites faster and easier to discover.',
     deliverables: [
       'On-page SEO',
@@ -50,7 +52,7 @@ const services = [
     ],
   },
   {
-    title: 'AI & Automation',
+    icon: 'spark', title: 'AI & Automation',
     description: 'Practical automation for business workflows and API-driven systems.',
     deliverables: [
       'Custom MCP servers',
@@ -81,9 +83,7 @@ export default function Services() {
               key={service.title}
               style={{ '--delay': `${index * 70}ms` }}
             >
-              <div className="service-number" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </div>
+              <div className="service-icon"><TechIcon name={service.icon} /></div>
               <h2>{service.title}</h2>
               <p>{service.description}</p>
               <ul>

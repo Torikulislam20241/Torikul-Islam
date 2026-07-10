@@ -1,7 +1,8 @@
+import TechIcon from './TechIcon.jsx'
+
 const highlights = [
-  { title: 'Frontend', detail: 'React & Vite' },
-  { title: 'Shopify', detail: 'Store builds' },
-  { title: 'Full Stack', detail: 'MERN apps' },
+  { title: 'Frontend', detail: 'React & Vite', icon: 'code' },
+  { title: 'Shopify', detail: 'E-commerce expert', icon: 'cart' },
 ]
 
 const stats = ['50+ Projects Delivered', '3+ Years Experience', '15+ Happy Clients']
@@ -22,9 +23,9 @@ export default function Hero() {
           </div>
 
           <h1>
-            <span>Torikul Islam</span>
+            Hi, I'm <span>Torikul Islam</span>
             <br />
-            I Build Digital Experiences
+            <em>I Build Digital Experiences</em>
           </h1>
 
           <p>
@@ -44,8 +45,11 @@ export default function Hero() {
           <div className="hero-highlight-grid" aria-label="Core services">
             {highlights.map((item) => (
               <a className="hero-highlight-card glass-card" href="#skills" key={item.title}>
+                <TechIcon name={item.icon} />
+                <div>
                 <strong>{item.title}</strong>
                 <span>{item.detail}</span>
+                </div>
               </a>
             ))}
           </div>

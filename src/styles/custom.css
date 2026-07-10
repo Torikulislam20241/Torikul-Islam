@@ -548,6 +548,8 @@ h3 {
   text-shadow: 0 0 32px rgba(1, 211, 232, 0.28);
 }
 
+.hero-content h1 em { color: var(--color-text-secondary); font-style: normal; }
+
 .hero-content p {
   color: var(--color-text-secondary);
   font-size: clamp(0.98rem, 1.7vw, 1.12rem);
@@ -566,15 +568,17 @@ h3 {
 .hero-highlight-grid {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 190px));
+  justify-content: center;
   margin: 48px auto 0;
   max-width: 760px;
 }
 
 .hero-highlight-card {
-  display: grid;
-  gap: 3px;
-  padding: 18px;
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
   text-align: left;
   transition:
     border-color 180ms ease,
@@ -587,8 +591,13 @@ h3 {
 }
 
 .hero-highlight-card strong {
+  display: block;
   font-family: var(--font-heading);
 }
+
+.tech-icon { align-items: center; display: inline-flex; flex: 0 0 auto; height: 24px; justify-content: center; width: 24px; }
+.tech-icon svg { fill: none; height: 100%; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; width: 100%; }
+.hero-highlight-card .tech-icon { color: var(--color-primary); }
 
 .hero-highlight-card span {
   color: var(--color-text-secondary);
@@ -706,15 +715,20 @@ h3 {
 .skills-groups {
   display: grid;
   gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .skills-group {
-  padding: 26px;
+  padding: 24px;
+  transition: border-color 180ms ease, transform 180ms ease;
 }
 
+.skills-group:hover { border-color: rgba(1, 211, 232, 0.5); transform: translateY(-4px); }
+.skills-group > .tech-icon { background: rgba(1, 211, 232, 0.1); border-radius: 12px; color: var(--color-primary); height: 46px; margin-bottom: 18px; padding: 11px; width: 46px; }
+
 .skills-group h2 {
-  font-size: 1.35rem;
-  margin-bottom: 18px;
+  font-size: 1.05rem;
+  margin-bottom: 14px;
 }
 
 .skills-list {
@@ -730,10 +744,14 @@ h3 {
   border-radius: 999px;
   color: #b8fbff;
   display: inline-flex;
-  font-size: 0.88rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  padding: 9px 12px;
+  padding: 6px 9px;
 }
+
+.skill-level { background: rgba(255,255,255,.08); border-radius: 99px; height: 5px; margin-top: 20px; overflow: hidden; }
+.skill-level span { background: linear-gradient(90deg, var(--color-primary), #5cf3ff); border-radius: inherit; display: block; height: 100%; }
+.skills-group small { color: var(--color-text-secondary); display: block; font-size: .7rem; margin-top: 7px; }
 
 .work-grid,
 .services-grid,
@@ -762,6 +780,16 @@ h3 {
     border-color 180ms ease,
     transform 180ms ease;
 }
+
+.project-card { padding: 0; }
+.project-card-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
+.project-preview { aspect-ratio: 16 / 9; background: radial-gradient(circle at 80% 20%, rgba(1,211,232,.32), transparent 42%), linear-gradient(135deg,#0a2430,#071015); overflow: hidden; padding: 24px; position: relative; }
+.project-preview-2 { background: radial-gradient(circle at 25% 30%, rgba(1,211,232,.28), transparent 40%), linear-gradient(135deg,#101b20,#081013); }
+.project-preview-3 { background: linear-gradient(140deg,#042d34,#101418); }
+.preview-browser { background: #0c1115; border: 1px solid rgba(255,255,255,.13); border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,.45); height: 100%; padding: 10px; transform: translateY(4px); transition: transform 450ms ease; }
+.project-card:hover .preview-browser { transform: scale(1.04) translateY(0); }
+.preview-browser > span { background: var(--color-primary); border-radius: 50%; display: inline-block; height: 5px; margin-right: 4px; opacity: .65; width: 5px; }
+.preview-browser > div { background: linear-gradient(135deg,rgba(1,211,232,.22),rgba(255,255,255,.03)); border-radius: 5px; height: calc(100% - 20px); margin-top: 8px; }
 
 .project-card:hover,
 .service-card:hover,
@@ -882,6 +910,11 @@ h3 {
   font-weight: 800;
   margin-bottom: 18px;
 }
+
+.services-grid { grid-template-columns: repeat(2, 1fr); }
+.service-card { min-height: 310px; padding: 30px; }
+.service-icon { align-items: center; background: linear-gradient(135deg,var(--color-primary),#55f0ff); border-radius: 14px; color: #001014; display: flex; height: 52px; justify-content: center; margin-bottom: 22px; width: 52px; }
+.service-icon .tech-icon { height: 26px; width: 26px; }
 
 .service-card ul {
   display: grid;
@@ -1118,6 +1151,8 @@ h3 {
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
+
+  .skills-groups { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 820px) {
@@ -1189,6 +1224,10 @@ h3 {
   .research-grid {
     grid-template-columns: 1fr;
   }
+
+  .skills-groups { grid-template-columns: 1fr; }
+  .hero-highlight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 330px; }
+  .hero-highlight-card { padding: 12px; }
 
   .hero-content {
     max-width: 100%;
@@ -1266,3 +1305,13 @@ h3 {
   .research-content-grid { margin-top: 48px; }
   .research-main-content section { gap: 12px; grid-template-columns: 32px 1fr; }
 }
+
+/* Structured footer inspired by the reference layout. */
+.footer { background: rgba(255,255,255,.018); padding: 44px 0 24px; }
+.footer-inner { display: block; }
+.footer-top { align-items: center; display: flex; justify-content: space-between; }
+.footer-brand { color: var(--color-primary); font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; }
+.footer-top p { margin-top: 4px; }
+.footer-copyright { border-top: 1px solid var(--color-border); margin-top: 30px; padding-top: 22px; text-align: center; }
+.footer-socials a { align-items: center; background: rgba(255,255,255,.05); border-radius: 9px; display: flex; height: 38px; justify-content: center; padding: 0; text-transform: uppercase; width: 38px; }
+@media (max-width: 640px) { .footer-top { flex-direction: column; gap: 22px; } }

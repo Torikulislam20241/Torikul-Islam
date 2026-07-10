@@ -1,23 +1,26 @@
+import TechIcon from './TechIcon.jsx'
+
 const skillGroups = [
   {
     title: 'Frontend',
+    icon: 'layout', level: 95,
     skills: ['React.js', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Bootstrap 5', 'Tailwind CSS'],
   },
   {
     title: 'Backend',
-    skills: ['Node.js', 'Express.js', 'Python', 'PHP'],
+    icon: 'server', level: 85, skills: ['Node.js', 'Express.js', 'Python', 'PHP'],
   },
   {
     title: 'CMS & E-commerce',
-    skills: ['WordPress', 'Shopify (Liquid)', 'WooCommerce', 'CJdropshipping'],
+    icon: 'cart', level: 95, skills: ['WordPress', 'Shopify (Liquid)', 'WooCommerce', 'CJdropshipping'],
   },
   {
     title: 'Database & Tools',
-    skills: ['MongoDB', 'MySQL', 'Git', 'GitHub', 'REST APIs', 'Postman'],
+    icon: 'code', level: 90, skills: ['MongoDB', 'MySQL', 'Git', 'GitHub', 'REST APIs', 'Postman'],
   },
   {
     title: 'Design & Deployment',
-    skills: ['Figma (basic)', 'Vercel', 'cPanel', 'Google Analytics', 'Meta Ads Manager'],
+    icon: 'spark', level: 82, skills: ['Figma (basic)', 'Vercel', 'cPanel', 'Google Analytics', 'Meta Ads Manager'],
   },
 ]
 
@@ -39,6 +42,7 @@ export default function Skills() {
         <div className="skills-groups">
           {skillGroups.map((group) => (
             <section className="skills-group glass-card reveal" key={group.title}>
+              <TechIcon name={group.icon} />
               <h2>{group.title}</h2>
               <div className="skills-list">
                 {group.skills.map((skill) => {
@@ -55,6 +59,8 @@ export default function Skills() {
                   )
                 })}
               </div>
+              <div className="skill-level"><span style={{ width: `${group.level}%` }} /></div>
+              <small>{group.level}%</small>
             </section>
           ))}
         </div>
