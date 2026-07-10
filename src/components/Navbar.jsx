@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import CodeMark from './CodeMark.jsx'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -33,7 +32,7 @@ export default function Navbar() {
     <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="container navbar-inner">
         <a className="navbar-brand" href="/" onClick={closeMenu}>
-          <CodeMark /> <span>Torikul Islam</span>
+          <span>Torikul Islam</span>
         </a>
 
         <nav className="nav-links" aria-label="Primary navigation">

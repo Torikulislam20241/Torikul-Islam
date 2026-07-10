@@ -1,10 +1,8 @@
-import CodeMark from './CodeMark.jsx'
-
 export default function ResearchDetail({ paper }) {
   if (!paper) return <main className="research-page"><div className="container research-not-found"><p>Research paper not found.</p><a className="btn-primary" href="/#achievements">Back to achievements</a></div></main>
   return (
     <div className="research-detail-shell">
-      <header className="detail-header"><div className="container detail-nav"><a className="navbar-brand" href="/#hero"><CodeMark /><span>Torikul Islam</span></a><a className="detail-back" href="/#achievements"><span aria-hidden="true">←</span> Back to achievements</a></div></header>
+      <header className="detail-header"><div className="container detail-nav"><a className="navbar-brand" href="/"><span>Torikul Islam</span></a><a className="detail-back" href="/achievements"><span aria-hidden="true">←</span> Back to achievements</a></div></header>
       <main className="research-page"><article className="container research-detail">
         <div className="research-detail-hero"><span className="detail-eyebrow">Published research</span><h1>{paper.title}</h1><p>{paper.description}</p>
           <div className="detail-meta"><div><span>Publication</span><strong>{paper.publication}</strong></div><div><span>Publication date</span><strong>{paper.date}</strong></div><div><span>Authors</span><strong>{paper.authors.join(', ')}</strong></div></div>

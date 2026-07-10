@@ -317,19 +317,16 @@ h3 {
   align-items: center;
   color: var(--color-primary);
   display: inline-flex;
-  font-family: var(--font-heading);
-  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-  gap: 10px;
-  font-weight: 700;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.85rem, 2.4vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1;
   min-width: max-content;
 }
 
 .navbar-brand span {
   color: var(--color-primary);
 }
-
-.code-mark { align-items: center; background: #eef1f3; border: 1px solid rgba(1,211,232,.35); border-radius: 9px; display: inline-flex; height: 36px; justify-content: center; overflow: hidden; padding: 2px; width: 36px; }
-.code-mark img { height: 100%; object-fit: contain; width: 100%; }
 
 .nav-links {
   align-items: center;
