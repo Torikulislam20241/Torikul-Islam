@@ -328,10 +328,8 @@ h3 {
   color: var(--color-primary);
 }
 
-.code-mark { display: inline-flex; height: 34px; width: 34px; }
-.code-mark svg { height: 100%; width: 100%; }
-.code-mark rect { fill: var(--color-primary); }
-.code-mark path { fill: none; stroke: #001014; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.2; }
+.code-mark { align-items: center; background: #eef1f3; border: 1px solid rgba(1,211,232,.35); border-radius: 9px; display: inline-flex; height: 36px; justify-content: center; overflow: hidden; padding: 2px; width: 36px; }
+.code-mark img { height: 100%; object-fit: contain; width: 100%; }
 
 .nav-links {
   align-items: center;
@@ -789,10 +787,10 @@ h3 {
 
 .project-card { padding: 0; }
 .project-card-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
-.project-preview { aspect-ratio: 16 / 9; background: radial-gradient(circle at 80% 20%, rgba(1,211,232,.32), transparent 42%), linear-gradient(135deg,#0a2430,#071015); overflow: hidden; position: relative; }
+.project-preview { aspect-ratio: 16 / 9; background: radial-gradient(circle at 80% 20%, rgba(1,211,232,.32), transparent 42%), linear-gradient(135deg,#0a2430,#071015); border-radius: 17px 17px 0 0; clip-path: inset(0 round 17px 17px 0 0); overflow: hidden; position: relative; }
 .project-preview-2 { background: radial-gradient(circle at 25% 30%, rgba(1,211,232,.28), transparent 40%), linear-gradient(135deg,#101b20,#081013); }
 .project-preview-3 { background: linear-gradient(140deg,#042d34,#101418); }
-.project-preview img { height: 100%; object-fit: cover; object-position: top; transition: transform 500ms ease; width: 100%; }
+.project-preview img { border-radius: inherit; display: block; height: 100%; object-fit: cover; object-position: top; transition: transform 500ms ease; width: 100%; }
 .project-card:hover .project-preview img { transform: scale(1.055); }
 .project-preview::after { background: linear-gradient(to top,rgba(0,0,0,.24),transparent 50%); content: ''; inset: 0; pointer-events: none; position: absolute; }
 .food-preview { background: linear-gradient(135deg,#092b31,#07171b 66%); height: 100%; overflow: hidden; padding: 18px 20px; position: relative; }
