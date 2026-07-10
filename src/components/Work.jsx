@@ -82,7 +82,13 @@ export default function Work() {
               style={{ '--delay': `${index * 70}ms` }}
           >
               <div className={`project-preview project-preview-${(index % 3) + 1}`}>
-                {project.image ? <img src={project.image} alt={`${project.title} website preview`} loading="lazy" /> : <div className="project-preview-fallback"><span>Live project</span><strong>{project.title}</strong></div>}
+                {project.image ? <img src={project.image} alt={`${project.title} website preview`} loading="lazy" /> : (
+                  <div className="food-preview" aria-label="Food ordering interface preview">
+                    <div className="food-preview-nav"><span className="food-preview-logo">Bite</span><div><i /><i /><i /></div></div>
+                    <div className="food-preview-copy"><small>Fresh food, fast delivery</small><strong>Order your favourites.</strong><span /></div>
+                    <div className="food-preview-items"><i /><i /><i /></div>
+                  </div>
+                )}
               </div>
               <div className="project-card-body">
               <div className="project-meta-line">
