@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
+import CodeMark from './CodeMark.jsx'
 
 const navLinks = [
   { href: '#hero', label: 'Home', id: 'hero' },
   { href: '#about', label: 'About', id: 'about' },
   { href: '#work', label: 'Projects', id: 'work' },
+  { href: '#achievements', label: 'Achievements', id: 'achievements' },
   { href: '#contact', label: 'Contact', id: 'contact' },
 ]
 
@@ -53,7 +55,7 @@ export default function Navbar() {
     <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="container navbar-inner">
         <a className="navbar-brand" href="#hero" onClick={closeMenu}>
-          Torikul Islam
+          <CodeMark /> <span>Torikul Islam</span>
         </a>
 
         <nav className="nav-links" aria-label="Primary navigation">

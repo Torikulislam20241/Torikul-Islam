@@ -6,15 +6,21 @@ import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
 import Skills from './components/Skills.jsx'
 import Work from './components/Work.jsx'
+import Achievements from './components/Achievements.jsx'
+import ResearchDetail from './components/ResearchDetail.jsx'
+import { researchPapers } from './data/research.js'
 import Services from './components/Services.jsx'
 import Testimonials from './components/Testimonials.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function App() {
+  const researchMatch = window.location.pathname.match(/^\/research\/([^/]+)\/?$/)
+  const activePaper = researchMatch ? researchPapers.find((paper) => paper.slug === decodeURIComponent(researchMatch[1])) : null
+
   useEffect(() => {
-    document.title = 'Torikul Islam | Full-Stack Developer'
-  }, [])
+    document.title = researchMatch ? `${activePaper?.title || 'Research'} | Torikul Islam` : 'Torikul Islam | Full-Stack Developer'
+  }, [activePaper, researchMatch])
 
   useEffect(() => {
     let observer
@@ -41,6 +47,8 @@ export default function App() {
     }
   }, [])
 
+  if (researchMatch) return <ResearchDetail paper={activePaper} />
+
   return (
     <div className="app">
       <Cursor />
@@ -51,6 +59,7 @@ export default function App() {
         <About />
         <Skills />
         <Work />
+        <Achievements />
         <Services />
         <Testimonials />
         <Contact />

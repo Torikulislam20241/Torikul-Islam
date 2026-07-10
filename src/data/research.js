@@ -1,0 +1,31 @@
+// Update publication metadata here. Cards and detail pages use this single source.
+export const researchPapers = [
+  {
+    slug: 'research-paper-01',
+    title: 'Research Paper 01',
+    description: 'A published research contribution focused on applying computing concepts to a practical, real-world problem.',
+    publication: 'Publication details to be added',
+    date: 'Date to be added',
+    paperUrl: '',
+    authors: ['Torikul Islam'],
+    abstract: 'The complete abstract for this publication will be added here together with the final publication record.',
+    methodology: 'Methodology details, including the research design, data collection process, tools, and evaluation criteria, will be documented here.',
+    results: 'Key findings and measured outcomes from the published study will be summarized here.',
+    keywords: ['Computer Science', 'Applied Research', 'Software Engineering'],
+    image: '',
+  },
+  {
+    slug: 'research-paper-03',
+    title: 'Research Paper 03',
+    description: 'An academic study exploring a technology-led approach, its implementation, and the resulting research insights.',
+    publication: 'Publication details to be added',
+    date: 'Date to be added',
+    paperUrl: '',
+    authors: ['Torikul Islam'],
+    abstract: 'The complete abstract for this publication will be added here together with the final publication record.',
+    methodology: 'Methodology details, including the research design, data collection process, tools, and evaluation criteria, will be documented here.',
+    results: 'Key findings and measured outcomes from the published study will be summarized here.',
+    keywords: ['Technology', 'Research', 'Computing'],
+    image: '',
+  },
+]
