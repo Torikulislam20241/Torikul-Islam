@@ -322,7 +322,10 @@ const handlePublish = async (req, res) => {
     return res.end()
   }
 
-  const url = /https:\/\/[^\s"]+\.vercel\.app/.exec(deploy.stdout)?.[0]
+  /* Prefer the stable alias over the one-off deployment URL. */
+  const combined = `${deploy.stdout}\n${deploy.stderr}`
+  const alias = /Aliased\s+(https:\/\/[^\s]+\.vercel\.app)/.exec(combined)?.[1]
+  const url = alias || /https:\/\/[^\s"]+\.vercel\.app/.exec(combined)?.[0]
   log('done', url ? `Published. Live at ${url}` : 'Published.')
   return res.end()
 }
