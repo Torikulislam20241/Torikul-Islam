@@ -7,8 +7,12 @@
 */
 import { useState } from 'react'
 import emailjs from 'emailjs-com'
+import { profile, socialLinks, whatsapp, whatsappUrl } from '../data/site.js'
+import SectionHeading from './SectionHeading.jsx'
 
-const CONTACT_EMAIL = 'naeemislam0252@gmail.com'
+const CONTACT_EMAIL = profile.email
+const WHATSAPP_DISPLAY = whatsapp.display
+const WHATSAPP_URL = whatsappUrl
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
 const USER_ID = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
@@ -23,13 +27,6 @@ const initialForm = {
   subject: '',
   message: '',
 }
-
-const socialLinks = [
-  { href: 'https://github.com/Torikulislam20241', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/torikul-islam-naeem/', label: 'LinkedIn' },
-  { href: 'https://www.upwork.com/', label: 'Upwork' },
-  { href: 'https://www.fiverr.com/', label: 'Fiverr' },
-]
 
 const buildMailtoUrl = ({ name, email, subject, message }) => {
   const emailSubject = subject || `Portfolio inquiry from ${name}`
@@ -101,14 +98,12 @@ export default function Contact() {
   return (
     <section className="page-section contact-section" id="contact" aria-label="Contact">
       <div className="container">
-        <div className="page-heading reveal visible">
-          <span>Get In Touch</span>
-          <h1>Let's build something useful together.</h1>
-          <p>
-            Have a project in mind? Send a message and I will get back to you
-            within 24 hours.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Get In Touch"
+          title="Let's build something useful together."
+          description="Have a project in mind? Send a message and I will get back to you within 24 hours."
+          level={1}
+        />
 
         <div className="contact-grid">
           <div className="contact-info glass-card reveal">
@@ -120,8 +115,16 @@ export default function Contact() {
 
             <div className="contact-details">
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-              <span>Dhaka, Bangladesh</span>
-              <span>Response within 24 hours</span>
+              <a
+                className="contact-whatsapp"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp: {WHATSAPP_DISPLAY}
+              </a>
+              <span>{profile.location}</span>
+              <span>{profile.responseTime}</span>
             </div>
 
             <div className="contact-socials" aria-label="Social links">

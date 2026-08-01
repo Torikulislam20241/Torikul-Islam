@@ -1,3 +1,4 @@
+import SectionHeading from './SectionHeading.jsx'
 import TechIcon from './TechIcon.jsx'
 
 const services = [
@@ -67,14 +68,11 @@ export default function Services() {
   return (
     <section className="page-section services-section" id="services" aria-label="Services">
       <div className="container">
-        <div className="page-heading reveal visible">
-          <span>What I Do</span>
-          <h1>Services I Offer</h1>
-          <p>
-            From idea to deployment, I provide focused development services for
-            businesses that need clean execution.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="What I Do"
+          title="Services I Offer"
+          description="From idea to deployment, I provide focused development services for businesses that need clean execution."
+        />
 
         <div className="services-grid">
           {services.map((service, index) => (
@@ -84,7 +82,7 @@ export default function Services() {
               style={{ '--delay': `${index * 70}ms` }}
             >
               <div className="service-icon"><TechIcon name={service.icon} /></div>
-              <h2>{service.title}</h2>
+              <h3>{service.title}</h3>
               <p>{service.description}</p>
               <ul>
                 {service.deliverables.map((item) => (

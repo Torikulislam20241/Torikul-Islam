@@ -1,3 +1,4 @@
+import SectionHeading from './SectionHeading.jsx'
 import TechIcon from './TechIcon.jsx'
 
 const skillGroups = [
@@ -30,20 +31,17 @@ export default function Skills() {
   return (
     <section className="page-section skills-section" id="skills" aria-label="Technical Skills">
       <div className="container">
-        <div className="page-heading reveal visible">
-          <span>My Expertise</span>
-          <h1>Skills & Technologies</h1>
-          <p>
-            A practical stack for client websites, online stores, full-stack apps,
-            tracking, deployment, and performance improvements.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="My Expertise"
+          title="Skills & Technologies"
+          description="A practical stack for client websites, online stores, full-stack apps, tracking, deployment, and performance improvements."
+        />
 
         <div className="skills-groups">
           {skillGroups.map((group) => (
             <section className="skills-group glass-card reveal" key={group.title}>
               <TechIcon name={group.icon} />
-              <h2>{group.title}</h2>
+              <h3>{group.title}</h3>
               <div className="skills-list">
                 {group.skills.map((skill) => {
                   delayIndex += 1

@@ -1,3 +1,5 @@
+import SectionHeading from './SectionHeading.jsx'
+
 const testimonials = [
   {
     rating: '5.0/5',
@@ -26,14 +28,11 @@ export default function Testimonials() {
   return (
     <section className="page-section testimonials-section" id="testimonials" aria-label="Client testimonials">
       <div className="container">
-        <div className="page-heading reveal visible">
-          <span>Testimonials</span>
-          <h1>What Clients Say</h1>
-          <p>
-            Feedback from clients and collaborators across business, e-commerce,
-            and web application projects.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Testimonials"
+          title="What Clients Say"
+          description="Feedback from clients and collaborators across business, e-commerce, and web application projects."
+        />
 
         <div className="testimonials-grid">
           {testimonials.map((testimonial, index) => (

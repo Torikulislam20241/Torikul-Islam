@@ -1,21 +1,45 @@
-const socialLinks = [
-  { href: 'https://github.com/Torikulislam20241', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/torikul-islam-naeem/', label: 'LinkedIn' },
-  { href: 'https://www.upwork.com/', label: 'Upwork' },
-  { href: 'https://www.fiverr.com/', label: 'Fiverr' },
-]
+import Logo from './Logo.jsx'
+import TechIcon from './TechIcon.jsx'
+import { cv, navLinks, profile, socialLinks } from '../data/site.js'
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-inner">
         <div className="footer-top">
-          <div><a className="footer-brand" href="/">Torikul Islam.</a><p>Full-Stack & Shopify Developer</p></div>
-          <div className="footer-socials" aria-label="Footer social links">
-            {socialLinks.map((link) => <a href={link.href} key={link.label} target="_blank" rel="noopener noreferrer" aria-label={link.label}>{link.label.slice(0, 2)}</a>)}
+          <div className="footer-brand-block">
+            <Logo />
+            <p>{profile.summary}</p>
+          </div>
+
+          <nav className="footer-nav" aria-label="Footer">
+            {navLinks.map((link) => (
+              <a href={link.href} key={link.href}>{link.label}</a>
+            ))}
+            <a href={cv.href} download={cv.fileName} aria-label="Download CV as PDF">
+              Download CV
+            </a>
+          </nav>
+
+          <div className="footer-socials" aria-label="Social profiles">
+            {socialLinks.map((link) => (
+              <a
+                href={link.href}
+                key={link.label}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+              >
+                <TechIcon name={link.icon} />
+              </a>
+            ))}
           </div>
         </div>
-        <p className="footer-copyright">&copy; 2026 Torikul Islam. All rights reserved.</p>
+
+        <div className="footer-copyright">
+          <p>&copy; {new Date().getFullYear()} {profile.fullName}. All rights reserved.</p>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        </div>
       </div>
     </footer>
   )

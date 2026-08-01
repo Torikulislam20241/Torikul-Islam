@@ -1,12 +1,48 @@
-const paths = {
+/* Shared inline icon set. Stroke icons inherit currentColor; brand glyphs are filled. */
+const strokePaths = {
   code: <><path d="m9 8-5 4 5 4M15 8l5 4-5 4M14 5l-4 14" /></>,
   cart: <><path d="M3 4h2l2.2 9h10.6l2-6H6" /><circle cx="9" cy="18" r="1" /><circle cx="17" cy="18" r="1" /></>,
   layout: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M9 9v11" /></>,
   server: <><rect x="3" y="4" width="18" height="6" rx="2" /><rect x="3" y="14" width="18" height="6" rx="2" /><path d="M7 7h.01M7 17h.01" /></>,
   speed: <><path d="M4 18a8 8 0 1 1 16 0" /><path d="m12 14 4-4" /><path d="M6 18h12" /></>,
   spark: <><path d="m13 2-2 7H5l5 4-2 9 9-11h-6z" /></>,
+  home: <><path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" /></>,
+  user: <><circle cx="12" cy="8" r="3.6" /><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0" /></>,
+  briefcase: <><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 12h18" /></>,
+  trophy: <><path d="M7 4h10v5a5 5 0 0 1-10 0z" /><path d="M7 6H4.5A2.5 2.5 0 0 0 7 9M17 6h2.5A2.5 2.5 0 0 1 17 9M12 14v3M8.5 20h7" /></>,
+  send: <><path d="M21 3 10.5 13.5M21 3l-6.8 18-3.7-7.5L3 9.8z" /></>,
+  download: <><path d="M12 3v11m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></>,
+  mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 7 8.5 6 8.5-6" /></>,
+  phone: <><path d="M5 3h3.5l1.8 4.4-2.2 1.6a12 12 0 0 0 5.9 5.9l1.6-2.2L20 14.5V18a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3 6.2 2 2 0 0 1 5 3z" /></>,
+  pin: <><path d="M12 21s6.5-6.2 6.5-11a6.5 6.5 0 0 0-13 0C5.5 14.8 12 21 12 21z" /><circle cx="12" cy="10" r="2.4" /></>,
+  arrow: <><path d="M5 12h13m0 0-5.5-5.5M18 12l-5.5 5.5" /></>,
+  close: <><path d="M6 6l12 12M18 6 6 18" /></>,
+  external: <><path d="M14 4h6v6M20 4l-9 9" /><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></>,
+  check: <><path d="m4 12.5 5 5L20 6.5" /></>,
+  terminal: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="m7.5 10 2.5 2.2-2.5 2.2M12.5 15h4" /></>,
 }
 
-export default function TechIcon({ name = 'code' }) {
-  return <span className="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24">{paths[name] || paths.code}</svg></span>
+const brandPaths = {
+  github: (
+    <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.69-.22.69-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z" />
+  ),
+  linkedin: (
+    <path d="M6.94 8.5v11.5H3.5V8.5h3.44zM5.22 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM20.5 20h-3.43v-5.98c0-1.5-.54-2.53-1.88-2.53-1.03 0-1.64.7-1.9 1.37-.1.24-.13.58-.13.92V20H9.7s.05-10.42 0-11.5h3.44v1.63c.46-.71 1.28-1.72 3.1-1.72 2.27 0 3.97 1.48 3.97 4.66V20z" />
+  ),
+  upwork: (
+    <path d="M18.1 6.9c-2.05 0-3.6 1.32-4.24 3.47-.98-1.48-1.72-3.24-2.16-4.73H8.5v5.72c0 1.13-.92 2.05-2.05 2.05a2.05 2.05 0 0 1-2.05-2.05V5.64H1.2v5.72a5.26 5.26 0 0 0 5.25 5.28c2.9 0 5.25-2.37 5.25-5.28v-.96c.43.9.96 1.81 1.6 2.62l-1.36 6.42h3.28l.99-4.65c.86.55 1.85.89 2.9.89 2.36 0 4.29-1.94 4.29-4.35s-1.93-4.43-4.3-4.43zm0 5.63c-.8 0-1.55-.34-2.24-.9l.2-.79v-.02c.15-.83.62-2.24 2.05-2.24 1.07 0 1.94.88 1.94 1.96 0 1.1-.87 1.99-1.94 1.99z" />
+  ),
+  fiverr: (
+    <path d="M16.5 4.2h-2.6a3.6 3.6 0 0 0-3.6 3.6v.9H8.1v-.9a3.6 3.6 0 0 0-3.6-3.6H3v2.7h1.5c.5 0 .9.4.9.9v.9H3v2.7h2.4v6.6H3v2.7h7.2v-2.7H8.1v-6.6h2.2v6.6H8.1v2.7h7.2v-2.7h-2.2v-6.6h4.3v6.6h-2.1v2.7H21v-2.7h-2.2V8.7h-5.5v-.9c0-.5.4-.9.9-.9h2.3V4.2z" />
+  ),
+}
+
+export default function TechIcon({ name = 'code', className = '' }) {
+  const brand = brandPaths[name]
+
+  return (
+    <span className={`tech-icon ${brand ? 'tech-icon-brand' : ''} ${className}`.trim()} aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false">{brand || strokePaths[name] || strokePaths.code}</svg>
+    </span>
+  )
 }

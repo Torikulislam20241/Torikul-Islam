@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Cursor from './components/Cursor.jsx'
 import ScrollProgress from './components/ScrollProgress.jsx'
+import SiteBackground from './components/SiteBackground.jsx'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
@@ -13,6 +14,7 @@ import Services from './components/Services.jsx'
 import Testimonials from './components/Testimonials.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+import WhatsAppChat from './components/WhatsAppChat.jsx'
 
 export default function App() {
   const currentPath = window.location.pathname.replace(/\/$/, '') || '/'
@@ -55,12 +57,19 @@ export default function App() {
     }
   }, [])
 
-  if (researchMatch) return <ResearchDetail paper={activePaper} />
+  if (researchMatch)
+    return (
+      <>
+        <SiteBackground />
+        <ResearchDetail paper={activePaper} />
+        <WhatsAppChat />
+      </>
+    )
 
   const pages = {
     '/': <><Hero /><Skills /><Services /><Work /><Testimonials /></>,
     '/about': <About />,
-    '/projects': <Work />,
+    '/projects': <Work standalone />,
     '/achievements': <Achievements />,
     '/contact': <Contact />,
   }
@@ -71,11 +80,20 @@ export default function App() {
 
   return (
     <div className="app">
+      <a className="skip-link" href="#main-content">Skip to main content</a>
+      <SiteBackground />
       <Cursor />
       <ScrollProgress />
       <Navbar />
-      <main className={currentPath === '/' ? 'home-layout' : 'standalone-page'}>{pageContent}</main>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className={currentPath === '/' ? 'home-layout' : 'standalone-page'}
+      >
+        {pageContent}
+      </main>
       <Footer />
+      <WhatsAppChat />
     </div>
   )
 }
