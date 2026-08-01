@@ -1,0 +1,50 @@
+{
+  "about": {
+    "eyebrow": "About Me",
+    "title": "Developer, e-commerce builder, and problem solver.",
+    "description": "I help businesses create strong online presences with practical, fast, and maintainable web solutions.",
+    "heading": "I'm Torikul Islam",
+    "paragraphs": [
+      "I'm a full-stack web developer and e-commerce specialist based in Dhaka, Bangladesh. I help businesses build powerful online presences through custom WordPress themes, Shopify stores, and MERN stack applications.",
+      "Currently completing my Computer Science degree at IUBAT while freelancing on Upwork and Fiverr. I'm passionate about clean code, performance optimization, and shipping products that actually work."
+    ],
+    "infoCards": [
+      { "label": "Location", "value": "Dhaka, Bangladesh" },
+      { "label": "Education", "value": "BSc Computer Science, IUBAT" },
+      { "label": "Freelance", "value": "Upwork & Fiverr Freelancer" }
+    ]
+  },
+  "skills": {
+    "eyebrow": "My Expertise",
+    "title": "Skills & Technologies",
+    "description": "A practical stack for client websites, online stores, full-stack apps, tracking, deployment, and performance improvements."
+  },
+  "services": {
+    "eyebrow": "What I Do",
+    "title": "Services I Offer",
+    "description": "From idea to deployment, I provide focused development services for businesses that need clean execution.",
+    "ctaLabel": "Discuss Your Project"
+  },
+  "work": {
+    "eyebrow": "Recent Work",
+    "title": "Featured Projects",
+    "description": "A focused collection of websites, e-commerce stores, dashboards, and client builds with live project links."
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "What Clients Say",
+    "description": "Feedback from clients and collaborators across business, e-commerce, and web application projects."
+  },
+  "achievements": {
+    "eyebrow": "Research & Publications",
+    "title": "My Achievements",
+    "description": "Published research that connects academic inquiry with practical computing and technology-led solutions."
+  },
+  "contact": {
+    "eyebrow": "Get In Touch",
+    "title": "Let's build something useful together.",
+    "description": "Have a project in mind? Send a message and I will get back to you within 24 hours.",
+    "heading": "Contact details",
+    "intro": "I work with founders, small businesses, e-commerce teams, and community organizations that need reliable web execution."
+  }
+}

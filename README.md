@@ -52,6 +52,61 @@ npm run dev
 
 ---
 
+## 🛠️ Admin panel
+
+Edit every piece of text, every project, and every image on the site from a local
+dashboard — no code required.
+
+```bash
+npm run admin
+```
+
+That opens **http://localhost:4321** in your browser and starts the site preview at
+**http://localhost:5173** at the same time. Edit a field, hit **Save**, and the preview
+updates instantly. When you're happy, click **Publish…** — it shows you exactly which
+files changed, then commits, pushes to GitHub, and deploys to Vercel production.
+
+**What you can edit**
+
+| Section | Covers |
+|---|---|
+| Profile & contact | Name, role, location, summary, email, phone, WhatsApp, portrait, avatar, CV, hero stats, hero tags, nav links, social links |
+| Section text | The eyebrow, heading, and description above every section, plus the About page copy and info cards |
+| Projects | Add, edit, reorder, delete project cards including screenshots |
+| Services | Service cards, icons, and deliverables |
+| Skills | Skill groups, icons, percentages, and individual skills |
+| Testimonials | Client quotes, names, roles, and ratings |
+| Research & publications | Papers, abstracts, authors, keywords — each gets its own `/research/<slug>` page |
+
+**Uploads** are optimised automatically: images are rotated upright, resized to the size
+the layout actually needs, and re-encoded as WebP. A 4.7 MB phone photo becomes roughly
+29 KB. PDFs (your CV) are stored as-is.
+
+**Safety**
+
+- The server binds to `127.0.0.1`, so nothing outside your computer can reach it.
+- It lives in `admin/`, outside `src/` — Vite never bundles it, and the published site
+  contains no admin code. Verified on every build.
+- Writes go to plain JSON files in `src/content/`, so every edit is a normal git diff.
+  Made a mistake? `git checkout src/content/` restores everything, or use the version
+  history in VS Code.
+- Requests are validated against `admin/schema.js`; unknown fields are rejected.
+
+**If something goes wrong**
+
+| Problem | Fix |
+|---|---|
+| `Port 4321 is already in use` | Close the other panel, or run `ADMIN_PORT=4322 npm run admin` |
+| Publish fails at the Vercel step | Run `npx vercel login`, then publish again |
+| Publish fails at the push step | Check your GitHub credentials, then publish again |
+| Image upload says conversion failed | Run `npm install` to reinstall `sharp` |
+| Preview didn't start | Run `npm run dev` in a second terminal |
+
+To add a new editable field, add it to `admin/schema.js` — the form builds itself from
+that file.
+
+---
+
 ## 📄 Replacing the CV
 
 The CV is served as a static file and linked with the HTML `download` attribute from the
@@ -98,6 +153,10 @@ This creates an optimised `dist/` folder. Deploy it to Vercel, Netlify, or any s
 
 ```
 portfolio/
+├── admin/                            ← local admin panel (never deployed)
+│   ├── server.js                     ← content API, uploads, publish
+│   ├── schema.js                     ← defines every editable field
+│   └── ui/                           ← dashboard (plain HTML/CSS/JS)
 ├── public/
 │   ├── assets/
 │   │   ├── Torikul-Islam-CV.pdf      ← replace to publish a new CV
@@ -115,9 +174,13 @@ portfolio/
 │   │   ├── About.jsx / Skills.jsx / Services.jsx / Work.jsx
 │   │   ├── Testimonials.jsx / Achievements.jsx / Contact.jsx / Footer.jsx
 │   │   ├── ResearchDetail.jsx / Cursor.jsx / ScrollProgress.jsx / WhatsAppChat.jsx
+│   ├── content/                      ← all site content as JSON (admin panel writes here)
+│   │   ├── profile.json  ├ sections.json  ├ projects.json
+│   │   ├── services.json ├ skills.json    ├ testimonials.json
+│   │   └── research.json
 │   ├── data/
-│   │   ├── site.js                   ← profile, nav, socials, CV, stats
-│   │   └── research.js               ← publications
+│   │   ├── site.js                   ← thin adapter over profile.json
+│   │   └── research.js               ← thin adapter over research.json
 │   ├── styles/
 │   │   └── custom.css                ← design tokens + all styles
 │   ├── App.jsx                       ← routing, page titles, scroll reveal
@@ -131,21 +194,17 @@ portfolio/
 
 ## ✏️ Common Customisations
 
+Most content is editable in the admin panel (`npm run admin`) — the table below is for
+things that still need code.
+
 | What to change                | Where                                                    |
 |-------------------------------|----------------------------------------------------------|
-| Name, role, email, location   | `src/data/site.js` → `profile`                           |
-| CV file / filename            | `public/assets/` + `src/data/site.js` → `cv`             |
-| Hero stats (100+, 3+, 98%)    | `src/data/site.js` → `stats`                             |
-| Navigation links              | `src/data/site.js` → `navLinks`                          |
-| Social links                  | `src/data/site.js` → `socialLinks`                       |
-| WhatsApp number / message     | `src/data/site.js` → `whatsapp`                          |
+| Any site text, projects, skills, services, testimonials, research, images, CV | **Admin panel** — `npm run admin` |
 | Hero code-card snippet        | `src/components/Hero.jsx` → `codeSnippet`                |
-| Services list                 | `src/components/Services.jsx` → `services`               |
-| Projects                      | `src/components/Work.jsx` → `projects`                   |
-| Testimonials                  | `src/components/Testimonials.jsx` → `testimonials`       |
-| Skills & percentages          | `src/components/Skills.jsx` → `skillGroups`              |
 | Accent colour, spacing, radii | `src/styles/custom.css` → `:root` token block            |
 | Background gradient / grid    | `src/styles/custom.css` → `.site-background*`            |
+| Page titles / SEO meta        | `index.html` and `src/App.jsx` → `pageTitles`            |
+| A new editable admin field    | `admin/schema.js`                                        |
 
 ---
 

@@ -1,61 +1,40 @@
 /*
-  Single source of truth for profile, navigation, and contact details.
-  Editing this file updates the navbar, hero, footer, and contact section at once.
+  Adapter over the JSON content files in src/content/.
+  Everything here is edited through the admin panel (`npm run admin`) — avoid
+  hand-editing the JSON while the panel is open, or your changes may be overwritten.
 */
+import content from '../content/profile.json'
 
 export const profile = {
-  name: 'Torikul Islam',
-  fullName: 'Torikul Islam Naeem',
-  role: 'Full-Stack Web Developer',
-  roleLong: 'Full-Stack Developer & E-commerce Specialist',
-  location: 'Dhaka, Bangladesh',
-  availability: 'Available for new projects',
-  email: 'naeemislam0252@gmail.com',
-  phone: '+880 1889-460252',
-  responseTime: 'Replies within 24 hours',
-  portrait: '/assets/torikul-islam-portrait.webp',
-  avatar: '/assets/torikul-islam-avatar.webp',
-  summary:
-    'I design and build fast, accessible web products — from custom WordPress and Shopify storefronts to MERN-stack applications — and ship them with performance, SEO, and maintainability handled from day one.',
+  name: content.name,
+  fullName: content.fullName,
+  role: content.role,
+  roleLong: content.roleLong,
+  location: content.location,
+  availability: content.availability,
+  email: content.email,
+  phone: content.phone,
+  responseTime: content.responseTime,
+  portrait: content.portrait,
+  avatar: content.avatar,
+  summary: content.summary,
 }
 
-/* Replace the file at this path to publish a new CV. Keep the same filename so existing links stay valid. */
 export const cv = {
-  href: '/assets/Torikul-Islam-CV.pdf',
-  fileName: 'Torikul-Islam-CV.pdf',
-  updated: 'August 2026',
+  href: content.cvHref,
+  fileName: content.cvFileName,
+  updated: content.cvUpdated,
 }
 
-export const stats = [
-  { value: '100+', label: 'Projects delivered' },
-  { value: '3+', label: 'Years experience' },
-  { value: '98%', label: 'Client satisfaction' },
-]
-
-export const navLinks = [
-  { href: '/', label: 'Home', icon: 'home' },
-  { href: '/about', label: 'About', icon: 'user' },
-  { href: '/projects', label: 'Projects', icon: 'briefcase' },
-  { href: '/achievements', label: 'Achievements', icon: 'trophy' },
-  { href: '/contact', label: 'Contact', icon: 'send' },
-]
-
-export const socialLinks = [
-  { href: 'https://github.com/Torikulislam20241', label: 'GitHub', short: 'GH', icon: 'github' },
-  {
-    href: 'https://www.linkedin.com/in/torikul-islam-naeem/',
-    label: 'LinkedIn',
-    short: 'IN',
-    icon: 'linkedin',
-  },
-  { href: 'https://www.upwork.com/', label: 'Upwork', short: 'UP', icon: 'upwork' },
-  { href: 'https://www.fiverr.com/', label: 'Fiverr', short: 'FV', icon: 'fiverr' },
-]
+export const stats = content.stats
+export const heroFocusAreas = content.heroFocusAreas
+export const navLinks = content.navLinks
+export const socialLinks = content.socialLinks
 
 export const whatsapp = {
-  number: '8801977069983',
-  display: '+880 1977-069983',
-  message: "Hi Torikul! I found your portfolio and I'd like to talk about a project.",
+  number: content.whatsappNumber,
+  display: content.whatsappDisplay,
+  message: content.whatsappMessage,
 }
 
 export const whatsappUrl = `https://wa.me/${whatsapp.number}?text=${encodeURIComponent(whatsapp.message)}`

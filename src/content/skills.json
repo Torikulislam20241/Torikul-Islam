@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Frontend",
+    "icon": "layout",
+    "level": 95,
+    "skills": [
+      "React.js",
+      "JavaScript (ES6+)",
+      "HTML5",
+      "CSS3",
+      "Bootstrap 5",
+      "Tailwind CSS"
+    ]
+  },
+  {
+    "title": "Backend",
+    "icon": "server",
+    "level": 85,
+    "skills": [
+      "Node.js",
+      "Express.js",
+      "Python",
+      "PHP"
+    ]
+  },
+  {
+    "title": "CMS & E-commerce",
+    "icon": "cart",
+    "level": 95,
+    "skills": [
+      "WordPress",
+      "Shopify (Liquid)",
+      "WooCommerce",
+      "CJdropshipping"
+    ]
+  },
+  {
+    "title": "Database & Tools",
+    "icon": "code",
+    "level": 90,
+    "skills": [
+      "MongoDB",
+      "MySQL",
+      "Git",
+      "GitHub",
+      "REST APIs",
+      "Postman"
+    ]
+  },
+  {
+    "title": "Design & Deployment",
+    "icon": "spark",
+    "level": 82,
+    "skills": [
+      "Figma (basic)",
+      "Vercel",
+      "cPanel",
+      "Google Analytics",
+      "Meta Ads Manager"
+    ]
+  }
+]

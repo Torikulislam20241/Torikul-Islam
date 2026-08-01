@@ -1,0 +1,68 @@
+[
+  {
+    "icon": "cart",
+    "title": "Shopify Development",
+    "description": "Conversion-focused Shopify builds for stores that need to launch cleanly.",
+    "deliverables": [
+      "Custom Liquid themes",
+      "App integration",
+      "Dropshipping setup",
+      "CJdropshipping config"
+    ]
+  },
+  {
+    "icon": "layout",
+    "title": "WordPress Development",
+    "description": "Custom WordPress sites that are easy to manage and built for speed.",
+    "deliverables": [
+      "Custom themes from scratch",
+      "WooCommerce",
+      "Plugin setup",
+      "Speed optimization"
+    ]
+  },
+  {
+    "icon": "code",
+    "title": "MERN Stack Development",
+    "description": "Modern full-stack applications with reliable APIs and responsive UI.",
+    "deliverables": [
+      "React frontend",
+      "Node/Express API",
+      "MongoDB database",
+      "Authentication flows"
+    ]
+  },
+  {
+    "icon": "server",
+    "title": "E-commerce Setup",
+    "description": "Complete store launch support from catalog to checkout readiness.",
+    "deliverables": [
+      "Product setup",
+      "Shipping and taxes",
+      "Store policies",
+      "Payment gateways"
+    ]
+  },
+  {
+    "icon": "speed",
+    "title": "SEO & Performance",
+    "description": "Technical improvements that make websites faster and easier to discover.",
+    "deliverables": [
+      "On-page SEO",
+      "Core Web Vitals fixes",
+      "Google Analytics",
+      "Search Console setup"
+    ]
+  },
+  {
+    "icon": "spark",
+    "title": "AI & Automation",
+    "description": "Practical automation for business workflows and API-driven systems.",
+    "deliverables": [
+      "Custom MCP servers",
+      "API integrations",
+      "Workflow automation",
+      "Claude AI tooling"
+    ]
+  }
+]

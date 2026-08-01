@@ -1,77 +1,16 @@
 import SectionHeading from './SectionHeading.jsx'
 import TechIcon from './TechIcon.jsx'
-
-const services = [
-  {
-    icon: 'cart', title: 'Shopify Development',
-    description: 'Conversion-focused Shopify builds for stores that need to launch cleanly.',
-    deliverables: [
-      'Custom Liquid themes',
-      'App integration',
-      'Dropshipping setup',
-      'CJdropshipping config',
-    ],
-  },
-  {
-    icon: 'layout', title: 'WordPress Development',
-    description: 'Custom WordPress sites that are easy to manage and built for speed.',
-    deliverables: [
-      'Custom themes from scratch',
-      'WooCommerce',
-      'Plugin setup',
-      'Speed optimization',
-    ],
-  },
-  {
-    icon: 'code', title: 'MERN Stack Development',
-    description: 'Modern full-stack applications with reliable APIs and responsive UI.',
-    deliverables: [
-      'React frontend',
-      'Node/Express API',
-      'MongoDB database',
-      'Authentication flows',
-    ],
-  },
-  {
-    icon: 'server', title: 'E-commerce Setup',
-    description: 'Complete store launch support from catalog to checkout readiness.',
-    deliverables: [
-      'Product setup',
-      'Shipping and taxes',
-      'Store policies',
-      'Payment gateways',
-    ],
-  },
-  {
-    icon: 'speed', title: 'SEO & Performance',
-    description: 'Technical improvements that make websites faster and easier to discover.',
-    deliverables: [
-      'On-page SEO',
-      'Core Web Vitals fixes',
-      'Google Analytics',
-      'Search Console setup',
-    ],
-  },
-  {
-    icon: 'spark', title: 'AI & Automation',
-    description: 'Practical automation for business workflows and API-driven systems.',
-    deliverables: [
-      'Custom MCP servers',
-      'API integrations',
-      'Workflow automation',
-      'Claude AI tooling',
-    ],
-  },
-]
+import services from '../content/services.json'
+import sections from '../content/sections.json'
 
 export default function Services() {
   return (
     <section className="page-section services-section" id="services" aria-label="Services">
       <div className="container">
         <SectionHeading
-          eyebrow="What I Do"
-          title="Services I Offer"
-          description="From idea to deployment, I provide focused development services for businesses that need clean execution."
+          eyebrow={sections.services.eyebrow}
+          title={sections.services.title}
+          description={sections.services.description}
         />
 
         <div className="services-grid">
@@ -95,7 +34,7 @@ export default function Services() {
 
         <div className="page-cta reveal">
           <a className="btn-primary" href="/contact">
-            Discuss Your Project
+            {sections.services.ctaLabel}
           </a>
         </div>
       </div>

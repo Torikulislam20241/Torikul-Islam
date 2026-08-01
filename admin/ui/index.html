@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Portfolio Admin</title>
+    <link rel="stylesheet" href="/ui/admin.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2301d3e8'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial' font-size='26' font-weight='700' fill='%23001014'%3ETI%3C/text%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <span class="mark">TI</span>
+          <div>
+            <strong>Portfolio Admin</strong>
+            <span class="muted">Local only</span>
+          </div>
+        </div>
+        <nav id="nav" class="nav" aria-label="Content sections"></nav>
+        <div class="sidebar-foot">
+          <a href="http://localhost:5173" target="_blank" rel="noopener">Open site preview ↗</a>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 id="section-title">Loading…</h1>
+            <p id="section-hint" class="muted"></p>
+          </div>
+          <div class="topbar-actions">
+            <span id="save-state" class="save-state" role="status" aria-live="polite"></span>
+            <button id="save" class="btn btn-primary" type="button" disabled>Save changes</button>
+            <button id="open-publish" class="btn" type="button">Publish…</button>
+          </div>
+        </header>
+
+        <div id="editor" class="editor"></div>
+      </main>
+    </div>
+
+    <dialog id="publish-dialog" class="dialog">
+      <form method="dialog" class="dialog-inner">
+        <h2>Publish to the live site</h2>
+        <p class="muted">
+          This commits your changes, pushes to GitHub, and deploys to Vercel production.
+        </p>
+
+        <div id="publish-changes" class="changes" aria-live="polite"></div>
+
+        <label class="field">
+          <span>Commit message</span>
+          <input id="publish-message" type="text" value="Update site content from admin panel" />
+        </label>
+
+        <pre id="publish-log" class="log" hidden></pre>
+
+        <div class="dialog-actions">
+          <button class="btn" value="cancel" type="submit">Cancel</button>
+          <button id="publish-confirm" class="btn btn-primary" type="button">Publish now</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="/ui/app.js"></script>
+  </body>
+</html>

@@ -1,41 +1,30 @@
 import { cv, profile } from '../data/site.js'
 import SectionHeading from './SectionHeading.jsx'
 import TechIcon from './TechIcon.jsx'
+import sections from '../content/sections.json'
 
-const infoCards = [
-  { label: 'Location', value: 'Dhaka, Bangladesh' },
-  { label: 'Education', value: 'BSc Computer Science, IUBAT' },
-  { label: 'Freelance', value: 'Upwork & Fiverr Freelancer' },
-]
+const about = sections.about
 
 export default function About() {
   return (
     <section className="page-section about-section" id="about" aria-label="About Torikul Islam">
       <div className="container">
         <SectionHeading
-          eyebrow="About Me"
-          title="Developer, e-commerce builder, and problem solver."
-          description="I help businesses create strong online presences with practical, fast, and maintainable web solutions."
+          eyebrow={about.eyebrow}
+          title={about.title}
+          description={about.description}
           level={1}
         />
 
         <div className="about-grid">
           <div className="about-copy reveal">
-            <h2>I'm Torikul Islam</h2>
-            <p>
-              I'm a full-stack web developer and e-commerce specialist based in
-              Dhaka, Bangladesh. I help businesses build powerful online presences
-              through custom WordPress themes, Shopify stores, and MERN stack
-              applications.
-            </p>
-            <p>
-              Currently completing my Computer Science degree at IUBAT while
-              freelancing on Upwork and Fiverr. I'm passionate about clean code,
-              performance optimization, and shipping products that actually work.
-            </p>
+            <h2>{about.heading}</h2>
+            {about.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
 
             <div className="about-info-cards">
-              {infoCards.map((item) => (
+              {about.infoCards.map((item) => (
                 <div className="about-info-card glass-card" key={item.label}>
                   <span>{item.label}</span>
                   <p>{item.value}</p>

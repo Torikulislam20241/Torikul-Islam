@@ -1,5 +1,5 @@
 import TechIcon from './TechIcon.jsx'
-import { cv, profile, socialLinks, stats } from '../data/site.js'
+import { cv, heroFocusAreas, profile, socialLinks, stats } from '../data/site.js'
 
 const heroSocials = socialLinks.filter((link) => link.label === 'GitHub' || link.label === 'LinkedIn')
 
@@ -13,7 +13,7 @@ const codeSnippet = [
   { indent: 0, parts: [['plain', '}']] },
 ]
 
-const focusAreas = ['React & Node.js', 'Shopify Liquid', 'WordPress', 'Core Web Vitals']
+const focusAreas = heroFocusAreas
 
 export default function Hero() {
   return (

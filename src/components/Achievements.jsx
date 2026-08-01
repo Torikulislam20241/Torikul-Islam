@@ -1,16 +1,12 @@
 import { researchPapers } from '../data/research.js'
 import SectionHeading from './SectionHeading.jsx'
+import sections from '../content/sections.json'
 
 export default function Achievements() {
   return (
     <section className="page-section achievements-section" id="achievements" aria-label="My Achievements">
       <div className="container">
-        <SectionHeading
-          eyebrow="Research & Publications"
-          title="My Achievements"
-          description="Published research that connects academic inquiry with practical computing and technology-led solutions."
-          level={1}
-        />
+        <SectionHeading {...sections.achievements} level={1} />
         <div className="research-grid">
           {researchPapers.map((paper, index) => (
             <article className="research-card glass-card reveal" key={paper.slug} style={{ '--delay': `${index * 80}ms` }}>

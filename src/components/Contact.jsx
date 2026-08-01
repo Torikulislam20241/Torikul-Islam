@@ -9,6 +9,7 @@ import { useState } from 'react'
 import emailjs from 'emailjs-com'
 import { profile, socialLinks, whatsapp, whatsappUrl } from '../data/site.js'
 import SectionHeading from './SectionHeading.jsx'
+import sections from '../content/sections.json'
 
 const CONTACT_EMAIL = profile.email
 const WHATSAPP_DISPLAY = whatsapp.display
@@ -99,19 +100,16 @@ export default function Contact() {
     <section className="page-section contact-section" id="contact" aria-label="Contact">
       <div className="container">
         <SectionHeading
-          eyebrow="Get In Touch"
-          title="Let's build something useful together."
-          description="Have a project in mind? Send a message and I will get back to you within 24 hours."
+          eyebrow={sections.contact.eyebrow}
+          title={sections.contact.title}
+          description={sections.contact.description}
           level={1}
         />
 
         <div className="contact-grid">
           <div className="contact-info glass-card reveal">
-            <h2>Contact details</h2>
-            <p>
-              I work with founders, small businesses, e-commerce teams, and
-              community organizations that need reliable web execution.
-            </p>
+            <h2>{sections.contact.heading}</h2>
+            <p>{sections.contact.intro}</p>
 
             <div className="contact-details">
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>

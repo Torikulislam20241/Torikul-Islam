@@ -1,78 +1,12 @@
 import SectionHeading from './SectionHeading.jsx'
-
-const projects = [
-  {
-    title: 'Online Food Ordering System',
-    type: 'Featured Web App',
-    year: '2025',
-    description:
-      'Designed an intuitive Food Ordering System, emphasizing clarity and user efficiency.',
-    tags: ['WordPress', 'Elementor', 'Hostinger', 'WooCommerce'],
-    link: 'https://lokalexpressgrill.com/',
-    image: '',
-  },
-  {
-    title: 'Farming Website',
-    type: 'Business',
-    year: '2026',
-    description:
-      'Developed a modern Farming Website that sells a variety of farming products with a focus on usability and seamless navigation for end users.',
-    tags: ['WordPress', 'Elementor', 'WooCommerce'],
-    link: 'https://mollahauto.com/',
-    image: '/projects/project-2.webp',
-  },
-  {
-    title: 'Developed a POS System to Manage Sales',
-    type: 'POS',
-    year: '2025',
-    description:
-      'Created a responsive dashboard layout that manages sales smoothly across devices and screen sizes.',
-    tags: ['PHP', 'Bootstrap', 'Laravel', 'API', 'SQL'],
-    link: 'https://pos.mollahauto.com/',
-    image: '/projects/project-3.webp',
-  },
-  {
-    title: 'Business Website',
-    type: 'Web App Dashboard',
-    year: '2025',
-    description:
-      'Improved user experience through strategic workflow streamlining and comprehensive interface component optimization.',
-    tags: ['WordPress', 'Elementor', 'Hostinger'],
-    link: 'https://medullaocean.com/',
-    image: '/projects/project-4.webp',
-  },
-  {
-    title: 'PaawVital',
-    type: 'Shopify E-commerce',
-    year: '2026',
-    description:
-      'Built a Shopify pet care store for grooming tools and smart essentials, with product sections, trust messaging, shipping guarantees, and a conversion-focused storefront for dog and cat owners.',
-    tags: ['Shopify', 'Liquid', 'E-commerce', 'Pet Care'],
-    link: 'https://paawvital.com/',
-    image: '/projects/project-5.webp',
-  },
-  {
-    title: 'Essex Muslim Centre',
-    type: 'Community Website',
-    year: '2026',
-    description:
-      'Developed a community and charity website with prayer-time sections, service pages, events, donation calls to action, and clear navigation for Chelmsford worshippers.',
-    tags: ['WordPress', 'Community', 'Events', 'Charity'],
-    link: 'https://slategray-wren-213577.hostingersite.com/',
-    image: '/projects/project-6.webp',
-  },
-]
+import projects from '../content/projects.json'
+import sections from '../content/sections.json'
 
 export default function Work({ standalone = false }) {
   return (
     <section className="page-section work-section" id="work" aria-label="Projects">
       <div className="container">
-        <SectionHeading
-          eyebrow="Recent Work"
-          title="Featured Projects"
-          description="A focused collection of websites, e-commerce stores, dashboards, and client builds with live project links."
-          level={standalone ? 1 : 2}
-        />
+        <SectionHeading {...sections.work} level={standalone ? 1 : 2} />
 
         <div className="work-grid">
           {projects.map((project, index) => (
