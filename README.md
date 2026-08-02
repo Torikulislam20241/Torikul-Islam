@@ -62,9 +62,11 @@ npm run admin
 ```
 
 That opens **http://localhost:4321** in your browser and starts the site preview at
-**http://localhost:5173** at the same time. Edit a field, hit **Save**, and the preview
-updates instantly. When you're happy, click **Publish…** — it shows you exactly which
-files changed, then commits, pushes to GitHub, and deploys to Vercel production.
+**http://localhost:5173** at the same time. Edit a field and the preview updates after
+you save. When you're happy, click **Publish…** — any pending edits are saved
+automatically, then the panel checks the production build, commits and pushes to GitHub,
+deploys to Vercel production, and verifies the new build at the live URL before reporting
+success.
 
 **What you can edit**
 

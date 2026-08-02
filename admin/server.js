@@ -16,6 +16,7 @@ import http from 'node:http'
 import fs from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
+import { randomUUID } from 'node:crypto'
 import { spawn } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { schema } from './schema.js'
@@ -31,6 +32,7 @@ if (!existsSync(path.join(ROOT, 'package.json'))) {
 const PORT = Number(process.env.ADMIN_PORT) || 4321
 const HOST = '127.0.0.1'
 const MAX_UPLOAD_BYTES = 25 * 1024 * 1024
+const LIVE_SITE_URL = process.env.LIVE_SITE_URL?.replace(/\/+$/, '') || ''
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -100,6 +102,44 @@ const run = (command, args, options = {}) =>
     child.on('close', (code) => resolve({ code, stdout, stderr }))
     child.on('error', (error) => resolve({ code: 1, stdout, stderr: error.message }))
   })
+
+const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds))
+
+const stripAnsi = (value) => value.replace(/\u001b\[[0-?]*[ -/]*[@-~]/g, '')
+
+const urlFromLine = (output, label) => {
+  const line = stripAnsi(output)
+    .split(/\r?\n/)
+    .find((entry) => entry.trim().toLowerCase().startsWith(label.toLowerCase()))
+  return line?.match(/https:\/\/[^\s]+/)?.[0]?.replace(/[),.;]+$/, '') || ''
+}
+
+const verifyLiveDeployment = async (url, publishId) => {
+  let lastProblem = 'the new publish marker was not visible yet'
+
+  for (let attempt = 1; attempt <= 15; attempt += 1) {
+    try {
+      const markerUrl = new URL('/publish-version.json', url)
+      markerUrl.searchParams.set('published', Date.now().toString())
+      const response = await fetch(markerUrl, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' },
+        redirect: 'follow',
+      })
+      const marker = await response.json().catch(() => ({}))
+      if (response.ok && marker.id === publishId) return { ok: true }
+      lastProblem = response.ok
+        ? 'the site still returned the previous build'
+        : `the site returned HTTP ${response.status}`
+    } catch (error) {
+      lastProblem = error.message
+    }
+
+    if (attempt < 15) await wait(2000)
+  }
+
+  return { ok: false, error: lastProblem }
+}
 
 /* --- validation --------------------------------------------------------- */
 
@@ -256,6 +296,10 @@ const handleUpload = async (req, res) => {
 const handleStatus = async (res) => {
   const status = await run('git', ['status', '--porcelain'])
   const branch = await run('git', ['rev-parse', '--abbrev-ref', 'HEAD'])
+  if (status.code !== 0 || branch.code !== 0) {
+    const problem = status.stderr || branch.stderr || 'Git is unavailable'
+    return sendJson(res, 500, { error: `Could not read repository status: ${problem.trim()}` })
+  }
   const changes = status.stdout
     .split('\n')
     .map((line) => line.trim())
@@ -289,7 +333,8 @@ const handlePublish = async (req, res) => {
     'Cache-Control': 'no-store',
   })
 
-  const log = (level, text) => res.write(`${JSON.stringify({ level, text })}\n`)
+  const log = (level, text, details = {}) =>
+    res.write(`${JSON.stringify({ level, text, ...details })}\n`)
 
   const step = async (label, command, args) => {
     log('step', label)
@@ -303,7 +348,23 @@ const handlePublish = async (req, res) => {
     return true
   }
 
+  /* Every publish gets a unique public marker. The live-site check below waits
+     for this exact ID, so even image-only updates with unchanged filenames are
+     verified rather than mistaken for an older cached deployment. */
+  const publishId = randomUUID()
+  await writeJsonAtomic(path.join(ROOT, 'public', 'publish-version.json'), {
+    id: publishId,
+    publishedAt: new Date().toISOString(),
+  })
+
   const status = await run('git', ['status', '--porcelain'])
+  if (status.code !== 0) {
+    log('error', `Could not read git status: ${status.stderr || 'unknown git error'}`)
+    return res.end()
+  }
+
+  if (!(await step('Checking the production build', 'npm', ['run', 'build']))) return res.end()
+
   if (!status.stdout.trim()) {
     log('info', 'No content changes to commit — deploying the current code instead.')
   } else {
@@ -314,7 +375,7 @@ const handlePublish = async (req, res) => {
   if (!(await step('Pushing to GitHub', 'git', ['push']))) return res.end()
 
   log('step', 'Deploying to Vercel (this can take a minute)')
-  const deploy = await run('npx', ['vercel', '--prod', '--yes'])
+  const deploy = await run('npx', ['vercel', 'deploy', '--prod', '--yes', '--no-color'])
   const deployOutput = `${deploy.stdout}${deploy.stderr}`.trim()
   if (deployOutput) log('output', deployOutput)
   if (deploy.code !== 0) {
@@ -322,11 +383,26 @@ const handlePublish = async (req, res) => {
     return res.end()
   }
 
-  /* Prefer the stable alias over the one-off deployment URL. */
+  /* Prefer the stable production alias over the one-off deployment URL. */
   const combined = `${deploy.stdout}\n${deploy.stderr}`
-  const alias = /Aliased\s+(https:\/\/[^\s]+\.vercel\.app)/.exec(combined)?.[1]
-  const url = alias || /https:\/\/[^\s"]+\.vercel\.app/.exec(combined)?.[0]
-  log('done', url ? `Published. Live at ${url}` : 'Published.')
+  const alias = urlFromLine(combined, 'Aliased')
+  const production = urlFromLine(combined, 'Production')
+  const fallback = stripAnsi(combined).match(/https:\/\/[^\s"]+\.vercel\.app/)?.[0] || ''
+  const url = LIVE_SITE_URL || alias || production || fallback
+
+  if (!url) {
+    log('error', 'Vercel deployed successfully, but the live URL could not be determined for verification.')
+    return res.end()
+  }
+
+  log('step', `Verifying the live site at ${url}`)
+  const verification = await verifyLiveDeployment(url, publishId)
+  if (!verification.ok) {
+    log('error', `Vercel finished, but the live-site check failed: ${verification.error}.`)
+    return res.end()
+  }
+
+  log('done', `Published and verified. Live at ${url}`, { url })
   return res.end()
 }
 

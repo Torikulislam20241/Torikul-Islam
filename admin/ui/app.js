@@ -384,6 +384,8 @@ const openSection = async (name) => {
 }
 
 const save = async () => {
+  if (!state.dirty) return true
+
   $('#save').disabled = true
   setSaveState('Saving…')
   try {
@@ -394,21 +396,36 @@ const save = async () => {
     })
     state.dirty = false
     setSaveState('Saved — the site preview reloads automatically', 'ok')
+    return true
   } catch (error) {
     setSaveState(error.message, 'error')
     $('#save').disabled = false
+    return false
   }
 }
 
 /* --- publish ------------------------------------------------------------ */
 
 const openPublish = async () => {
+  const openButton = $('#open-publish')
+  openButton.disabled = true
+
+  /* Publishing is one workflow: persist pending browser edits before git and
+     Vercel inspect the files on disk. */
+  if (state.dirty && !(await save())) {
+    openButton.disabled = false
+    return
+  }
+
   const dialog = $('#publish-dialog')
   const changes = $('#publish-changes')
   const log = $('#publish-log')
+  const result = $('#publish-result')
 
   log.hidden = true
   log.replaceChildren()
+  result.hidden = true
+  result.replaceChildren()
   changes.replaceChildren(el('p', { class: 'muted', text: 'Checking for changes…' }))
   $('#publish-confirm').disabled = false
   dialog.showModal()
@@ -425,45 +442,67 @@ const openPublish = async () => {
     )
   } catch (error) {
     changes.replaceChildren(el('p', { class: 'muted', text: error.message }))
+  } finally {
+    openButton.disabled = false
   }
 }
 
 const publish = async () => {
   const log = $('#publish-log')
+  const result = $('#publish-result')
   const confirmButton = $('#publish-confirm')
   confirmButton.disabled = true
   log.hidden = false
   log.replaceChildren()
+  result.hidden = true
+  result.replaceChildren()
 
   const append = (level, text) => {
     log.append(el('div', { class: level, text }))
     log.scrollTop = log.scrollHeight
   }
 
-  const response = await fetch('/api/publish', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: $('#publish-message').value }),
-  })
+  try {
+    const response = await fetch('/api/publish', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: $('#publish-message').value }),
+    })
+    if (!response.ok || !response.body) throw new Error(`Publish request failed (${response.status})`)
 
-  const reader = response.body.getReader()
-  const decoder = new TextDecoder()
-  let buffer = ''
+    const reader = response.body.getReader()
+    const decoder = new TextDecoder()
+    let buffer = ''
 
-  for (;;) {
-    const { done, value } = await reader.read()
-    if (done) break
-    buffer += decoder.decode(value, { stream: true })
-    const lines = buffer.split('\n')
-    buffer = lines.pop() || ''
-    for (const line of lines) {
-      if (!line.trim()) continue
-      const event = JSON.parse(line)
-      append(event.level, event.text)
+    for (;;) {
+      const { done, value } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+      const lines = buffer.split('\n')
+      buffer = lines.pop() || ''
+      for (const line of lines) {
+        if (!line.trim()) continue
+        const event = JSON.parse(line)
+        append(event.level, event.text)
+        if (event.level === 'done' && event.url) {
+          result.hidden = false
+          result.append(
+            document.createTextNode('The new version is live: '),
+            el('a', {
+              href: event.url,
+              target: '_blank',
+              rel: 'noopener',
+              text: 'Open live website ↗',
+            }),
+          )
+        }
+      }
     }
+  } catch (error) {
+    append('error', error.message)
+  } finally {
+    confirmButton.disabled = false
   }
-
-  confirmButton.disabled = false
 }
 
 /* --- boot --------------------------------------------------------------- */
