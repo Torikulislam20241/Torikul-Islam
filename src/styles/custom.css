@@ -512,72 +512,26 @@ main:focus {
   width: 50px;
 }
 
-/* Wordmark */
+/* Wordmark — the name only. */
 .brand {
   align-items: center;
   display: inline-flex;
-  gap: var(--space-3);
-  min-width: 0;
-}
-
-.brand-mark {
-  align-items: center;
-  background: linear-gradient(150deg, rgba(1, 211, 232, 0.9), rgba(1, 211, 232, 0.55));
-  border-radius: var(--radius-md);
-  color: var(--color-primary-ink);
-  display: inline-flex;
-  flex: 0 0 auto;
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  font-weight: 700;
-  height: 38px;
-  justify-content: center;
-  letter-spacing: -0.02em;
-  transition:
-    box-shadow var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
-  width: 38px;
-}
-
-.brand-text {
-  display: grid;
-  line-height: 1.15;
   min-width: 0;
 }
 
 .brand-name {
   color: var(--color-text-primary);
   font-family: var(--font-heading);
-  font-size: 1.08rem;
+  font-size: clamp(1.15rem, 1.6vw, 1.32rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  transition: color var(--duration-fast) ease;
   white-space: nowrap;
-}
-
-.brand-dot {
-  color: var(--color-primary);
-}
-
-.brand-role {
-  color: var(--color-text-muted);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.brand:hover .brand-mark {
-  box-shadow: 0 6px 18px rgba(1, 211, 232, 0.28);
-  transform: translateY(-1px);
 }
 
 .brand:hover .brand-name {
   color: var(--color-primary);
-}
-
-.brand-compact .brand-role {
-  display: none;
 }
 
 /* Header */
@@ -1296,7 +1250,7 @@ main:focus {
 
 .about-image-wrap {
   justify-self: end;
-  width: min(100%, 420px);
+  width: min(100%, 400px);
 }
 
 .about-image-frame {
@@ -1304,10 +1258,14 @@ main:focus {
   position: relative;
 }
 
+/* `height: auto` is required: the img's width/height attributes set a presentational
+   height that would otherwise win over aspect-ratio and stretch the photo. */
 .about-image-frame img {
   aspect-ratio: 1;
   border-radius: var(--radius-md);
+  height: auto;
   object-fit: cover;
+  object-position: center top;
   width: 100%;
 }
 
@@ -2534,10 +2492,6 @@ main:focus {
 
 /* Small phones (320–430px) */
 @media (max-width: 430px) {
-  .brand-role {
-    display: none;
-  }
-
   .about-info-cards {
     grid-template-columns: minmax(0, 1fr);
   }

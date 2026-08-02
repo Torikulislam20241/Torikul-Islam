@@ -165,7 +165,7 @@ export default function Navbar() {
           aria-label="Site navigation"
         >
           <div className="mobile-nav-head">
-            <Logo onClick={closeMenu} compact />
+            <Logo onClick={closeMenu} />
             <button
               ref={closeButtonRef}
               className="mobile-nav-close"

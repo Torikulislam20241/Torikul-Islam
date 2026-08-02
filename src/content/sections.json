@@ -3,15 +3,24 @@
     "eyebrow": "About Me",
     "title": "Developer, e-commerce builder, and problem solver.",
     "description": "I help businesses create strong online presences with practical, fast, and maintainable web solutions.",
-    "heading": "I'm Torikul Islam",
+    "heading": "I'm Torikul Islam Naeem",
     "paragraphs": [
       "I'm a full-stack web developer and e-commerce specialist based in Dhaka, Bangladesh. I help businesses build powerful online presences through custom WordPress themes, Shopify stores, and MERN stack applications.",
       "Currently completing my Computer Science degree at IUBAT while freelancing on Upwork and Fiverr. I'm passionate about clean code, performance optimization, and shipping products that actually work."
     ],
     "infoCards": [
-      { "label": "Location", "value": "Dhaka, Bangladesh" },
-      { "label": "Education", "value": "BSc Computer Science, IUBAT" },
-      { "label": "Freelance", "value": "Upwork & Fiverr Freelancer" }
+      {
+        "label": "Location",
+        "value": "Dhaka, Bangladesh"
+      },
+      {
+        "label": "Education",
+        "value": "BSc Computer Science, IUBAT"
+      },
+      {
+        "label": "Freelance",
+        "value": "Upwork & Fiverr Freelancer"
+      }
     ]
   },
   "skills": {
