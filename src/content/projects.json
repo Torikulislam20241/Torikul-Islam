@@ -81,5 +81,18 @@
     ],
     "link": "https://slategray-wren-213577.hostingersite.com/",
     "image": "/projects/project-6.webp"
+  },
+  {
+    "title": "BACC JobDirect",
+    "type": "job-portal",
+    "year": "2026",
+    "description": "A comprehensive and interactive job portal designed to bridge the gap between employers and job seekers. The platform features an intuitive UI/UX, advanced job filtering, secure authentication, and distinct dashboards for candidates and companies, ensuring a seamless recruitment experience.",
+    "tags": [
+      "PHP",
+      "MYSQL",
+      "WORDPRESS"
+    ],
+    "link": "https://darkslategray-clam-597455.hostingersite.com/job-portal/",
+    "image": "/projects/screenshot-2026-08-16-165946.webp"
   }
 ]
