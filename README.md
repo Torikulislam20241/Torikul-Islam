@@ -214,5 +214,5 @@ things that still need code.
 
 **Torikul Islam Naeem**
 📧 naeemislam0252@gmail.com
-🔗 https://www.linkedin.com/in/torikul-islam-naeem
+🔗 https://www.linkedin.com/in/torikul-islam-naeem-83686a451?utm_source=share_via&utm_content=profile&utm_medium=member_android
 🐱 https://github.com/Torikulislam20241
